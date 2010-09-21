@@ -1,5 +1,5 @@
 //
-//  SocialCoderAppDelegate.m
+//  AppDelegate.m
 //  SocialCoder
 //
 //  Created by Toni Suter on 21.09.10.
@@ -11,25 +11,24 @@
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
-	TTNavigator* navigator = [TTNavigator navigator];
-	navigator.persistenceMode = TTNavigatorPersistenceModeAll;
-	TTURLMap* map = navigator.URLMap;
-	[map from:@"*" toViewController:[TTWebController class]];
-	[map from:@"http://github.com/(initWithUsername:)" toViewController:[UserViewController class]];
-
-	//if (![navigator restoreViewControllers]) {
-	[navigator openURLAction:[TTURLAction actionWithURLPath:@"http://github.com/haefligs"]];
-	//}
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	_tabBarController = [[UITabBarController alloc] init];
+	
+	UserViewController *userViewController = [[UserViewController alloc] initWithUsername:@"dhh"];
+	UINavigationController *userNavigationController = [[UINavigationController alloc] initWithRootViewController:userViewController];
+	[_tabBarController setViewControllers:[NSArray arrayWithObjects:userNavigationController, nil]];
+	[userViewController release];
+	[userNavigationController release];
+    [_window addSubview:_tabBarController.view];
+    [_window makeKeyAndVisible];
+    return YES;
 }
 
-- (BOOL)navigator:(TTNavigator*)navigator shouldOpenURL:(NSURL*)URL {
-	return YES;
-}
-
-- (BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)URL {
-	[[TTNavigator navigator] openURLAction:[TTURLAction actionWithURLPath:URL.absoluteString]];
-	return YES;
+- (void)dealloc {
+    [_window release];
+	[_tabBarController release];
+    [super dealloc];
 }
 
 @end

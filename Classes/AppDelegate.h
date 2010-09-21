@@ -1,5 +1,5 @@
 //
-//  SocialCoderAppDelegate.h
+//  AppDelegate.h
 //  SocialCoder
 //
 //  Created by Toni Suter on 21.09.10.
@@ -7,9 +7,8 @@
 //
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
-
-
+	UIWindow *_window;
+	UITabBarController *_tabBarController;
 }
 
 @end
-
