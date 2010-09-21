@@ -7,15 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "UserViewController.h"
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation AppDelegate
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
   TTNavigator* navigator = [TTNavigator navigator];
   navigator.persistenceMode = TTNavigatorPersistenceModeAll;
@@ -23,20 +18,19 @@
   TTURLMap* map = navigator.URLMap;
 
   [map from:@"*" toViewController:[TTWebController class]];
+  [map from:@"http://github.com/(initWithUsername:)" toViewController:[UserViewController class]];
 
   if (![navigator restoreViewControllers]) {
-    [navigator openURLAction:[TTURLAction actionWithURLPath:@"http://three20.info"]];
+	  [navigator openURLAction:[TTURLAction
+								actionWithURLPath:@"http://github.com/tonisuter"]];
+
   }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)navigator:(TTNavigator*)navigator shouldOpenURL:(NSURL*)URL {
   return YES;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)URL {
   [[TTNavigator navigator] openURLAction:[TTURLAction actionWithURLPath:URL.absoluteString]];
   return YES;
