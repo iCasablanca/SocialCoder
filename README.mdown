@@ -1,0 +1,3 @@
+# SocialCoder
+
+SocialCoder is/will be a GitHub-Client for iPad.
