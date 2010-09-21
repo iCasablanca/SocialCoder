@@ -3,7 +3,7 @@
 //  SocialCoder
 //
 //  Created by Toni Suter on 21.09.10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright 2010 Toni Suter. All rights reserved.
 //
 
 int main(int argc, char *argv[]) {

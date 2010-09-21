@@ -3,7 +3,7 @@
 //  SocialCoder
 //
 //  Created by Toni Suter on 21.09.10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Toni Suter. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

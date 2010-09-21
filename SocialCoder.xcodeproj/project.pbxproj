@@ -14,6 +14,7 @@
 		1E443899124934E100BAEC5D /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E443898124934E100BAEC5D /* UserModel.m */; };
 		1E4438C7124935CE00BAEC5D /* UserDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4438C6124935CE00BAEC5D /* UserDataSource.m */; };
 		1E4438D412493B5F00BAEC5D /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4438D312493B5F00BAEC5D /* UserViewController.m */; };
+		1E44399612494E7C00BAEC5D /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E44399512494E7C00BAEC5D /* default_avatar.png */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		6E3175FB1126577100F4DDEC /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E3175FA1126577100F4DDEC /* Three20.bundle */; };
 		6E3176191126579100F4DDEC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3176181126579100F4DDEC /* QuartzCore.framework */; };
@@ -188,6 +189,7 @@
 		1E4438C6124935CE00BAEC5D /* UserDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataSource.m; sourceTree = "<group>"; };
 		1E4438D212493B5F00BAEC5D /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		1E4438D312493B5F00BAEC5D /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		1E44399512494E7C00BAEC5D /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = Images/default_avatar.png; sourceTree = "<group>"; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* SocialCoder_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialCoder_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -253,7 +255,7 @@
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources-iPad */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
 				6EF9630E118E95E6003902E7 /* Dependencies */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -271,13 +273,14 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		29B97317FDCFA39411CA2CEA /* Resources-iPad */ = {
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E44399512494E7C00BAEC5D /* default_avatar.png */,
 				6E3175FA1126577100F4DDEC /* Three20.bundle */,
 				8D1107310486CEB800E47090 /* SocialCoder-Info.plist */,
 			);
-			name = "Resources-iPad";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -572,6 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E3175FB1126577100F4DDEC /* Three20.bundle in Resources */,
+				1E44399612494E7C00BAEC5D /* default_avatar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
