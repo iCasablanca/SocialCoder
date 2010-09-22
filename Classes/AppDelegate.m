@@ -15,7 +15,7 @@
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	_tabBarController = [[UITabBarController alloc] init];
 	
-	UserViewController *userViewController = [[UserViewController alloc] initWithUsername:@"dhh"];
+	UserViewController *userViewController = [[UserViewController alloc] initWithUsername:@"tonisuter"];
 	UINavigationController *userNavigationController = [[UINavigationController alloc] initWithRootViewController:userViewController];
 	[_tabBarController setViewControllers:[NSArray arrayWithObjects:userNavigationController, nil]];
 	[userViewController release];
