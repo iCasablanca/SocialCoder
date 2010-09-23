@@ -2,13 +2,16 @@
 //  main.m
 //  SocialCoder
 //
-//  Created by Toni Suter on 21.09.10.
-//  Copyright 2010 Toni Suter. All rights reserved.
+//  Created by Toni Suter on 23.09.10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 int main(int argc, char *argv[]) {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-  int retVal = UIApplicationMain(argc, argv, nil, @"AppDelegate");
-  [pool release];
-  return retVal;
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    int retVal = UIApplicationMain(argc, argv, nil, @"SocialCoderAppDelegate");
+    [pool release];
+    return retVal;
 }
