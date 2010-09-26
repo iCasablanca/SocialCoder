@@ -22,7 +22,7 @@
 		[avatarView_ setFrame:CGRectMake(50,self.frame.size.height/2-25,50,50)];
 		[self addSubview:avatarView_];
 		
-		nickname = @"tonisuter";
+		nickname = @"";
 		nicknameLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(110,self.frame.size.height/2-25,self.frame.size.width-110, 30)];
 		[nicknameLabel_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 		[nicknameLabel_ setFont:[UIFont boldSystemFontOfSize:20.0]];
@@ -31,7 +31,7 @@
 		[nicknameLabel_ setText:nickname];
 		[self addSubview:nicknameLabel_];
 		
-		fullname = @"Toni Suter";
+		fullname = @"";
 		fullnameLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(110,self.frame.size.height/2+5,self.frame.size.width-110, 20)];
 		[fullnameLabel_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 		[fullnameLabel_ setFont:[UIFont systemFontOfSize:14.0]];
@@ -41,6 +41,30 @@
 		[self addSubview:fullnameLabel_];
     }
     return self;
+}
+
+- (void)setAvatar:(UIImage *)anAvatar  {
+    if(avatar != anAvatar)  {
+        [avatar release];
+        avatar = [anAvatar retain];
+        [avatarView_ setImage:avatar];
+    }
+}
+
+- (void)setNickname:(NSString *)aNickname  {
+    if(nickname != aNickname)  {
+        [nickname release];
+        nickname = [aNickname retain];
+        [nicknameLabel_ setText:nickname];
+    }
+}
+
+- (void)setFullname:(NSString *)aFullname  {
+    if(fullname != aFullname)  {
+        [fullname release];
+        fullname = [aFullname retain];
+        [fullnameLabel_ setText:fullname];
+    }
 }
 
 /*

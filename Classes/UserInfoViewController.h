@@ -13,6 +13,8 @@
 @interface UserInfoViewController : UITableViewController {
 @private
 	UserInfoHeaderView *userInfoHeaderView_;
+    NSMutableData *receivedData_;
+    NSMutableArray *tableData_;
 }
 
 @end
