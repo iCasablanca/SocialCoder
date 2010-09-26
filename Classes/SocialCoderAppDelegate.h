@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class ProfileViewController;
+@class GistsViewController;
 
 @interface SocialCoderAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
@@ -20,6 +21,7 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	UITabBarController *tabBarController_;
 	ProfileViewController *profileViewController_;
+    GistsViewController *gistsViewController_;
 }
 
 @property (nonatomic, retain) UIWindow *window;

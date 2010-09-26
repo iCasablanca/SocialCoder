@@ -8,6 +8,7 @@
 
 #import "SocialCoderAppDelegate.h"
 #import "ProfileViewController.h"
+#import "GistsViewController.h"
 
 
 @implementation SocialCoderAppDelegate
@@ -24,10 +25,14 @@
 	profileViewController_ = [[ProfileViewController alloc] init];
 	UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController_];
 	
+    gistsViewController_ = [[GistsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *gistsNavigationController = [[UINavigationController alloc] initWithRootViewController:gistsViewController_];
+    
 	tabBarController_ = [[UITabBarController alloc] init];
-	[tabBarController_ setViewControllers:[NSArray arrayWithObjects:profileNavigationController, nil]];
+	[tabBarController_ setViewControllers:[NSArray arrayWithObjects:profileNavigationController, gistsNavigationController, nil]];
 	[profileNavigationController release];
-	
+	[gistsNavigationController release];
+    
 	[window addSubview:tabBarController_.view];
     [window makeKeyAndVisible];
     return YES;
@@ -173,7 +178,8 @@
     [persistentStoreCoordinator_ release];
     [tabBarController_ release];
 	[profileViewController_ release];
-	
+	[gistsViewController_ release];
+    
     [window release];
     [super dealloc];
 }
