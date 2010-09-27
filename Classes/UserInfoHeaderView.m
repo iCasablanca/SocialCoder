@@ -27,7 +27,7 @@
 		[nicknameLabel_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 		[nicknameLabel_ setFont:[UIFont boldSystemFontOfSize:20.0]];
 		[nicknameLabel_ setBackgroundColor:[UIColor clearColor]];
-		[nicknameLabel_ setTextColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.3 alpha:1.0]];
+		[nicknameLabel_ setTextColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.6 alpha:1.0]];
 		[nicknameLabel_ setText:nickname];
 		[self addSubview:nicknameLabel_];
 		
@@ -36,7 +36,7 @@
 		[fullnameLabel_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 		[fullnameLabel_ setFont:[UIFont systemFontOfSize:14.0]];
 		[fullnameLabel_ setBackgroundColor:[UIColor clearColor]];
-		[fullnameLabel_ setTextColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.1 alpha:1.0]];
+		[fullnameLabel_ setTextColor:[UIColor colorWithRed:0.4 green:0.4 blue:0.5 alpha:1.0]];
 		[fullnameLabel_ setText:fullname];
 		[self addSubview:fullnameLabel_];
     }

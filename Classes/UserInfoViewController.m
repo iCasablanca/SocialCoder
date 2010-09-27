@@ -51,15 +51,23 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection  {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSString *jsonString = [[NSString alloc] initWithData:receivedData_ encoding:NSISOLatin1StringEncoding];
-    NSLog(@"%@", jsonString);
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *parsedJson = [parser objectWithString:jsonString];
+    [jsonString release];
     [parser release];
     NSDictionary *user = [parsedJson objectForKey:@"user"];
-
+    
+    if([user objectForKey:@"location"]!= nil && [user objectForKey:@"location"] != [NSNull null] && ![[user objectForKey:@"location"] isEqualToString:@""])  {
+        [[tableData_ objectAtIndex:0] addObject:@"Location"];
+        [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"location"]];
+    }
     if([user objectForKey:@"blog"]!= nil && [user objectForKey:@"blog"] != [NSNull null] && ![[user objectForKey:@"blog"] isEqualToString:@""])  {
         [[tableData_ objectAtIndex:0] addObject:@"Blog"];
         [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"blog"]];
+    }
+    if([user objectForKey:@"email"]!= nil && [user objectForKey:@"email"] != [NSNull null] && ![[user objectForKey:@"email"] isEqualToString:@""])  {
+        [[tableData_ objectAtIndex:0] addObject:@"Email"];
+        [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"email"]];
     }
     if([user objectForKey:@"company"]!= nil && [user objectForKey:@"company"] != [NSNull null] && ![[user objectForKey:@"company"] isEqualToString:@""] )  {
         [[tableData_ objectAtIndex:0] addObject:@"Company"];
@@ -69,10 +77,6 @@
         [[tableData_ objectAtIndex:0] addObject:@"Member Since"];
         [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"created_at"]];
     }
-    if([user objectForKey:@"email"]!= nil && [user objectForKey:@"email"] != [NSNull null] && ![[user objectForKey:@"email"] isEqualToString:@""])  {
-        [[tableData_ objectAtIndex:0] addObject:@"Email"];
-        [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"email"]];
-    }
     if([user objectForKey:@"followers_count"]!= nil && [user objectForKey:@"followers_count"] != [NSNull null])  {
         [[tableData_ objectAtIndex:0] addObject:@"Followers"];
         [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"followers_count"] stringValue]];
@@ -81,12 +85,8 @@
         [[tableData_ objectAtIndex:0] addObject:@"Following"];
         [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"following_count"] stringValue]];
     }
-    if([user objectForKey:@"location"]!= nil && [user objectForKey:@"location"] != [NSNull null] && ![[user objectForKey:@"location"] isEqualToString:@""])  {
-        [[tableData_ objectAtIndex:0] addObject:@"Location"];
-        [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"location"]];
-    }
     if([user objectForKey:@"public_gist_count"]!= nil && [user objectForKey:@"public_gist_count"] != [NSNull null])  {
-        [[tableData_ objectAtIndex:0] addObject:@"Gists"];
+        [[tableData_ objectAtIndex:0] addObject:@"Public Gists"];
         [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"public_gist_count"] stringValue]];
     }
     if([user objectForKey:@"public_repo_count"]!= nil && [user objectForKey:@"public_repo_count"] != [NSNull null])  {
@@ -96,14 +96,6 @@
     if([user objectForKey:@"total_private_repo_count"]!= nil && [user objectForKey:@"total_private_repo_count"] != [NSNull null])  {
         [[tableData_ objectAtIndex:0] addObject:@"Private Repositories"];
         [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"total_private_repo_count"] stringValue]];
-    }
-    if([user objectForKey:@"type"]!= nil && [user objectForKey:@"type"] != [NSNull null] && ![[user objectForKey:@"type"] isEqualToString:@""])  {
-        [[tableData_ objectAtIndex:0] addObject:@"Type"];
-        [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"type"]];
-    }
-    if([user objectForKey:@"disk_usage"]!= nil && [user objectForKey:@"disk_usage"] != [NSNull null])  {
-        [[tableData_ objectAtIndex:0] addObject:@"Disk Usage"];
-        [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"disk_usage"] stringValue]];
     }
     
     
@@ -202,6 +194,7 @@
     
     [[cell textLabel] setText:[[tableData_ objectAtIndex:1] objectAtIndex:indexPath.row]];
     [[cell detailTextLabel] setText:[[tableData_ objectAtIndex:0] objectAtIndex:indexPath.row]];
+    [cell setBackgroundColor:[UIColor colorWithRed:0.8 green:0.9 blue:0.8 alpha:1.0]];
     return cell;
 }
 

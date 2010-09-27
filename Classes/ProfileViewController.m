@@ -28,13 +28,13 @@
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
 	
 	userInfoViewController_ = [[UserInfoViewController alloc] initWithCredentials:credentials_];
-	[userInfoViewController_.view setFrame:CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height)];
-	[userInfoViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin];
+	[userInfoViewController_.view setFrame:CGRectMake(0, 0, 300, self.view.frame.size.height)];
+	[userInfoViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin];
 	[self.view addSubview:userInfoViewController_.view];
 	
 	newsFeedViewController_ = [[NewsFeedViewController alloc] initWithCredentials:credentials_];
-	[newsFeedViewController_.view setFrame:CGRectMake(self.view.frame.size.width/2, 0, self.view.frame.size.width/2, self.view.frame.size.height)];
-	[newsFeedViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleLeftMargin];
+	[newsFeedViewController_.view setFrame:CGRectMake(300, 0, self.view.frame.size.width-300, self.view.frame.size.height)];
+	[newsFeedViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 	[self.view addSubview:newsFeedViewController_.view];
 }
 

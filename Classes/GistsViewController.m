@@ -49,6 +49,7 @@
     NSString *jsonString = [[NSString alloc] initWithData:receivedData_ encoding:NSISOLatin1StringEncoding];
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *parsedJson = [parser objectWithString:jsonString];
+    [jsonString release];
     [parser release];
     NSArray *gists = [parsedJson objectForKey:@"gists"];
     for(NSDictionary *gist in gists)  {

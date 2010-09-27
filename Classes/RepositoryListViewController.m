@@ -49,9 +49,9 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection  {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSString *jsonString = [[NSString alloc] initWithData:receivedData_ encoding:NSISOLatin1StringEncoding];
-    //NSLog(@"%@", jsonString);
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *parsedJson = [parser objectWithString:jsonString];
+    [jsonString release];
     [parser release];
     NSArray *repositories = [parsedJson objectForKey:@"repositories"];
     for(NSDictionary *repository in repositories)  {
