@@ -22,6 +22,8 @@
 				<string>1.0</string>
 				<key>kind</key>
 				<string>software</string>
+				<key>subtitle</key>
+				<string>Github Client for iPad</string>
 				<key>title</key>
 				<string>SocialCoder</string>
 			</dict>
