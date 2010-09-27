@@ -330,14 +330,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Toni Suter (NAJ87AFX8Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Toni Suter";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AAC2A3A3-4B39-45B4-86BC-AC16077F008C";
-				SDKROOT = iphonesimulator3.2;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1F508BBF-F17C-43BE-B63E-3FC4839DAA05";
+				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -346,15 +346,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Toni Suter (NAJ87AFX8Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Toni Suter";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AAC2A3A3-4B39-45B4-86BC-AC16077F008C";
-				SDKROOT = iphonesimulator3.2;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1F508BBF-F17C-43BE-B63E-3FC4839DAA05";
+				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
