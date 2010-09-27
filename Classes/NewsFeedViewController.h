@@ -10,7 +10,10 @@
 
 
 @interface NewsFeedViewController : UITableViewController {
-
+@private
+    NSArray *credentials_;
 }
+
+- (id)initWithCredentials:(NSArray *)credentials;
 
 @end

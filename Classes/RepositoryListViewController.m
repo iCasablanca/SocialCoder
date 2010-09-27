@@ -1,31 +1,33 @@
 //
-//  GistsViewController.m
+//  RepositoryListViewController.m
 //  SocialCoder
 //
-//  Created by Toni Suter on 26.09.10.
+//  Created by Toni Suter on 27.09.10.
 //  Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "GistsViewController.h"
+#import "RepositoryListViewController.h"
 #import "JSON/JSON.h"
 #import "Base64.h"
 
-
-@implementation GistsViewController
+@implementation RepositoryListViewController
 
 
 #pragma mark -
 #pragma mark Initialization
 
-- (id)initWithCredentials:(NSArray *)credentials {
-    if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
-        [self setTitle:@"Gists"];
-        receivedData_ = [[NSMutableData alloc] init];
-        tableData_ = [[NSMutableArray alloc] init];
+
+- (id)initWithCredentials:(NSArray *)credentials  {
+    if ((self = [super initWithStyle:UITableViewStylePlain])) {
         credentials_ = [credentials retain];
         
+        [self.tableView setRowHeight:100.0];
+        
+        tableData_ = [[NSMutableArray alloc] init];
+        receivedData_ = [[NSMutableData alloc] init];
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://gist.github.com/api/v1/json/gists/", [credentials_ objectAtIndex:0]]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://github.com/api/v2/json/repos/show/", [credentials_ objectAtIndex:0]]];
         NSMutableString *loginString = (NSMutableString*)[@"" stringByAppendingFormat:@"%@:%@", [credentials_ objectAtIndex:0], [credentials_ objectAtIndex:1]];  
         char *encodedLoginData = [Base64 encode:[loginString dataUsingEncoding:NSUTF8StringEncoding]];  
         NSString *authHeader = [NSString stringWithFormat:@"Basic %@", [NSString stringWithUTF8String:encodedLoginData]];  
@@ -47,18 +49,15 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection  {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSString *jsonString = [[NSString alloc] initWithData:receivedData_ encoding:NSISOLatin1StringEncoding];
+    //NSLog(@"%@", jsonString);
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *parsedJson = [parser objectWithString:jsonString];
     [parser release];
-    NSArray *gists = [parsedJson objectForKey:@"gists"];
-    for(NSDictionary *gist in gists)  {
-        if([[gist objectForKey:@"files"] count] == 0)  {
-            [tableData_ addObject:@""];  
-        }
-        else  {
-            [tableData_ addObject:[[gist objectForKey:@"files"] objectAtIndex:0]];   
-        }
+    NSArray *repositories = [parsedJson objectForKey:@"repositories"];
+    for(NSDictionary *repository in repositories)  {
+        [tableData_ addObject:[repository objectForKey:@"name"]];
     }
+
     [self.tableView reloadData];
 }
 
@@ -69,11 +68,8 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response  {
-   
+    
 }
-
-
-
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -83,8 +79,7 @@
     [super viewDidLoad];
 
     [self.tableView setBackgroundView:nil];
-    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.22 alpha:1.0]];
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5]];
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
  
@@ -145,6 +140,7 @@
     }
     
     [[cell textLabel] setText:[tableData_ objectAtIndex:indexPath.row]];
+    [[cell contentView] setBackgroundColor:[UIColor clearColor]];
     
     return cell;
 }

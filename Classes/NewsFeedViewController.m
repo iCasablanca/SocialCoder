@@ -15,14 +15,14 @@
 #pragma mark -
 #pragma mark Initialization
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if ((self = [super initWithStyle:style])) {
+
+- (id)initWithCredentials:(NSArray *)credentials  {
+    if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
+        credentials_ = [credentials retain];
     }
     return self;
 }
-*/
+
 
 
 #pragma mark -
@@ -173,6 +173,7 @@
 
 
 - (void)dealloc {
+    [credentials_ release];
     [super dealloc];
 }
 

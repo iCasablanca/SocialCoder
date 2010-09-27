@@ -23,13 +23,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
-	profileViewController_ = [[ProfileViewController alloc] init];
+    NSArray *credentials = [NSArray arrayWithObjects:@"tonisuter", @"_", nil];
+    
+	profileViewController_ = [[ProfileViewController alloc] initWithCredentials:credentials];
 	UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController_];
 	
-    repositoriesViewController_ = [[RepositoriesViewController alloc] init];
+    repositoriesViewController_ = [[RepositoriesViewController alloc] initWithCredentials:credentials];
 	UINavigationController *repositoriesNavigationController = [[UINavigationController alloc] initWithRootViewController:repositoriesViewController_];
     
-    gistsViewController_ = [[GistsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    gistsViewController_ = [[GistsViewController alloc] initWithCredentials:credentials];
     UINavigationController *gistsNavigationController = [[UINavigationController alloc] initWithRootViewController:gistsViewController_];
     
 	tabBarController_ = [[UITabBarController alloc] init];

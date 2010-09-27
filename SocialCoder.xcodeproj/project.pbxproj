@@ -13,6 +13,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		1E3EA0421250FC9100B7C5B6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3EA0411250FC9100B7C5B6 /* MessageUI.framework */; };
 		1E3EA053125102D000B7C5B6 /* RepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3EA052125102D000B7C5B6 /* RepositoriesViewController.m */; };
+		1E3EA06A1251110600B7C5B6 /* RepositoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3EA0691251110600B7C5B6 /* RepositoryListViewController.m */; };
+		1E3EA07A12511B2200B7C5B6 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3EA07912511B2200B7C5B6 /* Base64.m */; };
 		1E590578124BFD7A007FAAA9 /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E590577124BFD7A007FAAA9 /* default_avatar.png */; };
 		1E59057C124BFDFA007FAAA9 /* UserInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E59057B124BFDFA007FAAA9 /* UserInfoHeaderView.m */; };
 		1EC8E978124FA13100DCB289 /* GistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E977124FA13100DCB289 /* GistsViewController.m */; };
@@ -38,6 +40,10 @@
 		1E3EA0411250FC9100B7C5B6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1E3EA051125102D000B7C5B6 /* RepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoriesViewController.h; sourceTree = "<group>"; };
 		1E3EA052125102D000B7C5B6 /* RepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoriesViewController.m; sourceTree = "<group>"; };
+		1E3EA0681251110600B7C5B6 /* RepositoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoryListViewController.h; sourceTree = "<group>"; };
+		1E3EA0691251110600B7C5B6 /* RepositoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryListViewController.m; sourceTree = "<group>"; };
+		1E3EA07812511B2200B7C5B6 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		1E3EA07912511B2200B7C5B6 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		1E590577124BFD7A007FAAA9 /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = Images/default_avatar.png; sourceTree = "<group>"; };
 		1E59057A124BFDFA007FAAA9 /* UserInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoHeaderView.h; sourceTree = "<group>"; };
 		1E59057B124BFDFA007FAAA9 /* UserInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoHeaderView.m; sourceTree = "<group>"; };
@@ -90,6 +96,8 @@
 				1EC8E987124FB2F100DCB289 /* JSON */,
 				1D3623240D0F684500981E51 /* SocialCoderAppDelegate.h */,
 				1D3623250D0F684500981E51 /* SocialCoderAppDelegate.m */,
+				1E3EA07812511B2200B7C5B6 /* Base64.h */,
+				1E3EA07912511B2200B7C5B6 /* Base64.m */,
 				1EC8E9A8124FB9C600DCB289 /* ProfileView */,
 				1E3EA0501251028F00B7C5B6 /* RepositoryView */,
 				1EC8E9A9124FB9EA00DCB289 /* GistView */,
@@ -110,6 +118,8 @@
 			children = (
 				1E3EA051125102D000B7C5B6 /* RepositoriesViewController.h */,
 				1E3EA052125102D000B7C5B6 /* RepositoriesViewController.m */,
+				1E3EA0681251110600B7C5B6 /* RepositoryListViewController.h */,
+				1E3EA0691251110600B7C5B6 /* RepositoryListViewController.m */,
 			);
 			name = RepositoryView;
 			sourceTree = "<group>";
@@ -281,6 +291,8 @@
 				1EC8E996124FB30700DCB289 /* SBJsonParser.m in Sources */,
 				1EC8E997124FB30700DCB289 /* SBJsonWriter.m in Sources */,
 				1E3EA053125102D000B7C5B6 /* RepositoriesViewController.m in Sources */,
+				1E3EA06A1251110600B7C5B6 /* RepositoryListViewController.m in Sources */,
+				1E3EA07A12511B2200B7C5B6 /* Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

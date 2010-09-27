@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class RepositoryListViewController;
 
 @interface RepositoriesViewController : UIViewController {
-
+@private
+    RepositoryListViewController *repositoryListViewController_;
+    NSArray *credentials_;
 }
+
+- (id)initWithCredentials:(NSArray *)credentials;
 
 @end

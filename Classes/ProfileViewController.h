@@ -15,6 +15,9 @@
 @private
 	UserInfoViewController *userInfoViewController_;
 	NewsFeedViewController *newsFeedViewController_;
+    NSArray *credentials_;
 }
+
+- (id)initWithCredentials:(NSArray *)credentials;
 
 @end

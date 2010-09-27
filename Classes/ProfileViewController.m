@@ -12,9 +12,10 @@
 
 @implementation ProfileViewController
 
-- (id)init {
+- (id)initWithCredentials:(NSArray *)credentials {
     if((self = [super init])) {
 		[self setTitle:@"Profile"];
+        credentials_ = [credentials retain];
     }
     return self;
 }
@@ -26,12 +27,12 @@
 	
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
 	
-	userInfoViewController_ = [[UserInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	userInfoViewController_ = [[UserInfoViewController alloc] initWithCredentials:credentials_];
 	[userInfoViewController_.view setFrame:CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height)];
 	[userInfoViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin];
 	[self.view addSubview:userInfoViewController_.view];
 	
-	newsFeedViewController_ = [[NewsFeedViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	newsFeedViewController_ = [[NewsFeedViewController alloc] initWithCredentials:credentials_];
 	[newsFeedViewController_.view setFrame:CGRectMake(self.view.frame.size.width/2, 0, self.view.frame.size.width/2, self.view.frame.size.height)];
 	[newsFeedViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleLeftMargin];
 	[self.view addSubview:newsFeedViewController_.view];
@@ -71,6 +72,7 @@
 
 
 - (void)dealloc {
+    [credentials_ release];
     [super dealloc];
 }
 

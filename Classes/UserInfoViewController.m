@@ -9,6 +9,7 @@
 #import "UserInfoViewController.h"
 #import "UserInfoHeaderView.h"
 #import "JSON/JSON.h"
+#import "Base64.h"
 
 @implementation UserInfoViewController
 
@@ -17,16 +18,23 @@
 #pragma mark Initialization
 
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    if ((self = [super initWithStyle:style])) {
+- (id)initWithCredentials:(NSArray *)credentials  {
+    if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
+        credentials_ = [credentials retain];
+        
 		userInfoHeaderView_ = [[UserInfoHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 100)];
 		[self.tableView setTableHeaderView:userInfoHeaderView_];
         
         tableData_ = [[NSMutableArray alloc] initWithObjects:[NSMutableArray array], [NSMutableArray array], nil];
         receivedData_ = [[NSMutableData alloc] init];
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:@"http://github.com/api/v2/json/user/show/tonisuter"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://github.com/api/v2/json/user/show/", [credentials_ objectAtIndex:0]]];
+        NSMutableString *loginString = (NSMutableString*)[@"" stringByAppendingFormat:@"%@:%@", [credentials_ objectAtIndex:0], [credentials_ objectAtIndex:1]];  
+        char *encodedLoginData = [Base64 encode:[loginString dataUsingEncoding:NSUTF8StringEncoding]];  
+        NSString *authHeader = [NSString stringWithFormat:@"Basic %@", [NSString stringWithUTF8String:encodedLoginData]];  
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:3];     
+        [request addValue:authHeader forHTTPHeaderField:@"Authorization"];  
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         [connection release];
     }           
@@ -43,6 +51,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection  {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSString *jsonString = [[NSString alloc] initWithData:receivedData_ encoding:NSISOLatin1StringEncoding];
+    NSLog(@"%@", jsonString);
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *parsedJson = [parser objectWithString:jsonString];
     [parser release];
@@ -81,12 +90,20 @@
         [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"public_gist_count"] stringValue]];
     }
     if([user objectForKey:@"public_repo_count"]!= nil && [user objectForKey:@"public_repo_count"] != [NSNull null])  {
-        [[tableData_ objectAtIndex:0] addObject:@"Repos"];
+        [[tableData_ objectAtIndex:0] addObject:@"Public Repositories"];
         [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"public_repo_count"] stringValue]];
+    }
+    if([user objectForKey:@"total_private_repo_count"]!= nil && [user objectForKey:@"total_private_repo_count"] != [NSNull null])  {
+        [[tableData_ objectAtIndex:0] addObject:@"Private Repositories"];
+        [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"total_private_repo_count"] stringValue]];
     }
     if([user objectForKey:@"type"]!= nil && [user objectForKey:@"type"] != [NSNull null] && ![[user objectForKey:@"type"] isEqualToString:@""])  {
         [[tableData_ objectAtIndex:0] addObject:@"Type"];
         [[tableData_ objectAtIndex:1] addObject:[user objectForKey:@"type"]];
+    }
+    if([user objectForKey:@"disk_usage"]!= nil && [user objectForKey:@"disk_usage"] != [NSNull null])  {
+        [[tableData_ objectAtIndex:0] addObject:@"Disk Usage"];
+        [[tableData_ objectAtIndex:1] addObject:[[user objectForKey:@"disk_usage"] stringValue]];
     }
     
     
@@ -270,6 +287,7 @@
 	[userInfoHeaderView_ release];
     [receivedData_ release];
     [tableData_ release];
+    [credentials_ release];
     [super dealloc];
 }
 

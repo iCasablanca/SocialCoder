@@ -1,15 +1,15 @@
 //
-//  GistsViewController.h
+//  RepositoryListViewController.h
 //  SocialCoder
 //
-//  Created by Toni Suter on 26.09.10.
+//  Created by Toni Suter on 27.09.10.
 //  Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 
-@interface GistsViewController : UITableViewController {
+@interface RepositoryListViewController : UITableViewController {
 @private
     NSMutableData *receivedData_;
     NSMutableArray *tableData_;

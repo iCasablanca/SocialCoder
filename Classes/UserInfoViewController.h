@@ -16,6 +16,9 @@
 	UserInfoHeaderView *userInfoHeaderView_;
     NSMutableData *receivedData_;
     NSMutableArray *tableData_;
+    NSArray *credentials_;
 }
+
+- (id)initWithCredentials:(NSArray *)credentials;
 
 @end

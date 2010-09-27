@@ -7,14 +7,15 @@
 //
 
 #import "RepositoriesViewController.h"
-
+#import "RepositoryListViewController.h"
 
 @implementation RepositoriesViewController
 
 
-- (id)init {
+- (id)initWithCredentials:(NSArray *)credentials {
     if ((self = [super init])) {
         [self setTitle:@"Repositories"];
+        credentials_ = [credentials retain];
     }
     return self;
 }
@@ -25,6 +26,11 @@
     [super loadView];
     [self.view setBackgroundColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.22 alpha:1.0]];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
+
+	repositoryListViewController_ = [[RepositoryListViewController alloc] initWithCredentials:credentials_];
+	[repositoryListViewController_.view setFrame:CGRectMake(0, 0, 300, self.view.frame.size.height)];
+	[repositoryListViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin];
+	[self.view addSubview:repositoryListViewController_.view];
 }
 
 
@@ -52,12 +58,14 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
+    [repositoryListViewController_ release];
+    repositoryListViewController_ = nil;
 }
 
 
 - (void)dealloc {
+    [credentials_ release];
     [super dealloc];
 }
 
