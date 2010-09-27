@@ -8,6 +8,7 @@
 
 #import "SocialCoderAppDelegate.h"
 #import "ProfileViewController.h"
+#import "RepositoriesViewController.h"
 #import "GistsViewController.h"
 
 
@@ -25,12 +26,20 @@
 	profileViewController_ = [[ProfileViewController alloc] init];
 	UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController_];
 	
+    repositoriesViewController_ = [[RepositoriesViewController alloc] init];
+	UINavigationController *repositoriesNavigationController = [[UINavigationController alloc] initWithRootViewController:repositoriesViewController_];
+    
     gistsViewController_ = [[GistsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *gistsNavigationController = [[UINavigationController alloc] initWithRootViewController:gistsViewController_];
     
 	tabBarController_ = [[UITabBarController alloc] init];
-	[tabBarController_ setViewControllers:[NSArray arrayWithObjects:profileNavigationController, gistsNavigationController, nil]];
+	[tabBarController_ setViewControllers:[NSArray arrayWithObjects:
+                                           profileNavigationController, 
+                                           repositoriesNavigationController, 
+                                           gistsNavigationController, 
+                                           nil]];
 	[profileNavigationController release];
+    [repositoriesNavigationController release];
 	[gistsNavigationController release];
     
 	[window addSubview:tabBarController_.view];
@@ -178,8 +187,8 @@
     [persistentStoreCoordinator_ release];
     [tabBarController_ release];
 	[profileViewController_ release];
+    [repositoriesViewController_ release];
 	[gistsViewController_ release];
-    
     [window release];
     [super dealloc];
 }

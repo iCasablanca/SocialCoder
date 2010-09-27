@@ -71,7 +71,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+    [self.tableView setBackgroundView:nil];
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.22 alpha:1.0]];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
  

@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class ProfileViewController;
+@class RepositoriesViewController;
 @class GistsViewController;
 
 @interface SocialCoderAppDelegate : NSObject <UIApplicationDelegate> {
@@ -21,6 +22,7 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	UITabBarController *tabBarController_;
 	ProfileViewController *profileViewController_;
+    RepositoriesViewController *repositoriesViewController_;
     GistsViewController *gistsViewController_;
 }
 

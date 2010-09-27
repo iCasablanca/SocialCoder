@@ -25,7 +25,7 @@
         tableData_ = [[NSMutableArray alloc] initWithObjects:[NSMutableArray array], [NSMutableArray array], nil];
         receivedData_ = [[NSMutableData alloc] init];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:@"http://github.com/api/v2/json/user/show/tlrobinson"];
+        NSURL *url = [NSURL URLWithString:@"http://github.com/api/v2/json/user/show/tonisuter"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         [connection release];
@@ -118,17 +118,19 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self.tableView setBackgroundView:nil];
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.22 alpha:1.0]];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
+
 
 /*
 - (void)viewWillAppear:(BOOL)animated {

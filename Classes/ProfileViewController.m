@@ -24,7 +24,7 @@
 - (void)loadView {
 	[super loadView];
 	
-	[self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
 	
 	userInfoViewController_ = [[UserInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[userInfoViewController_.view setFrame:CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height)];
