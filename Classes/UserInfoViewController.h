@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @class UserInfoHeaderView;
 
-@interface UserInfoViewController : UITableViewController {
+@interface UserInfoViewController : UITableViewController<MFMailComposeViewControllerDelegate> {
 @private
 	UserInfoHeaderView *userInfoHeaderView_;
     NSMutableData *receivedData_;

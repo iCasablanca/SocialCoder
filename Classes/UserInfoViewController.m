@@ -25,7 +25,7 @@
         tableData_ = [[NSMutableArray alloc] initWithObjects:[NSMutableArray array], [NSMutableArray array], nil];
         receivedData_ = [[NSMutableData alloc] init];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:@"http://github.com/api/v2/json/user/show/tonisuter"];
+        NSURL *url = [NSURL URLWithString:@"http://github.com/api/v2/json/user/show/tlrobinson"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         [connection release];
@@ -231,14 +231,20 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+    if([[[tableData_ objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@"Email"])  {
+        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+        [mailController setMailComposeDelegate:self];
+        [mailController setToRecipients:[NSArray arrayWithObject:[[tableData_ objectAtIndex:1] objectAtIndex:indexPath.row]]];
+        [mailController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [self presentModalViewController:mailController animated:YES];
+        [mailController release];   
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error  {
+    [self becomeFirstResponder];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
