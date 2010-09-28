@@ -15,6 +15,7 @@
 		1E3EA053125102D000B7C5B6 /* RepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3EA052125102D000B7C5B6 /* RepositoriesViewController.m */; };
 		1E3EA06A1251110600B7C5B6 /* RepositoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3EA0691251110600B7C5B6 /* RepositoryListViewController.m */; };
 		1E3EA07A12511B2200B7C5B6 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3EA07912511B2200B7C5B6 /* Base64.m */; };
+		1E4104CC12528FBC007B027A /* FileBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4104CB12528FBC007B027A /* FileBrowserViewController.m */; };
 		1E590578124BFD7A007FAAA9 /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E590577124BFD7A007FAAA9 /* default_avatar.png */; };
 		1E59057C124BFDFA007FAAA9 /* UserInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E59057B124BFDFA007FAAA9 /* UserInfoHeaderView.m */; };
 		1EC8E978124FA13100DCB289 /* GistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E977124FA13100DCB289 /* GistsViewController.m */; };
@@ -44,6 +45,8 @@
 		1E3EA0691251110600B7C5B6 /* RepositoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryListViewController.m; sourceTree = "<group>"; };
 		1E3EA07812511B2200B7C5B6 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		1E3EA07912511B2200B7C5B6 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		1E4104CA12528FBC007B027A /* FileBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBrowserViewController.h; sourceTree = "<group>"; };
+		1E4104CB12528FBC007B027A /* FileBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBrowserViewController.m; sourceTree = "<group>"; };
 		1E590577124BFD7A007FAAA9 /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = Images/default_avatar.png; sourceTree = "<group>"; };
 		1E59057A124BFDFA007FAAA9 /* UserInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoHeaderView.h; sourceTree = "<group>"; };
 		1E59057B124BFDFA007FAAA9 /* UserInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoHeaderView.m; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 				1E3EA052125102D000B7C5B6 /* RepositoriesViewController.m */,
 				1E3EA0681251110600B7C5B6 /* RepositoryListViewController.h */,
 				1E3EA0691251110600B7C5B6 /* RepositoryListViewController.m */,
+				1E4104CA12528FBC007B027A /* FileBrowserViewController.h */,
+				1E4104CB12528FBC007B027A /* FileBrowserViewController.m */,
 			);
 			name = RepositoryView;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				1E3EA053125102D000B7C5B6 /* RepositoriesViewController.m in Sources */,
 				1E3EA06A1251110600B7C5B6 /* RepositoryListViewController.m in Sources */,
 				1E3EA07A12511B2200B7C5B6 /* Base64.m in Sources */,
+				1E4104CC12528FBC007B027A /* FileBrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +343,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1F508BBF-F17C-43BE-B63E-3FC4839DAA05";
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphonesimulator3.2;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -354,7 +360,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1F508BBF-F17C-43BE-B63E-3FC4839DAA05";
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphonesimulator3.2;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

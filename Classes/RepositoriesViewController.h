@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class RepositoryListViewController;
+@class FileBrowserViewController;
 
 @interface RepositoriesViewController : UIViewController {
 @private
     RepositoryListViewController *repositoryListViewController_;
+    FileBrowserViewController *fileBrowserViewController_;
     NSArray *credentials_;
 }
 

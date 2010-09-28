@@ -8,6 +8,7 @@
 
 #import "RepositoriesViewController.h"
 #import "RepositoryListViewController.h"
+#import "FileBrowserViewController.h"
 
 @implementation RepositoriesViewController
 
@@ -31,6 +32,11 @@
 	[repositoryListViewController_.view setFrame:CGRectMake(0, 0, 300, self.view.frame.size.height)];
 	[repositoryListViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin];
 	[self.view addSubview:repositoryListViewController_.view];
+    
+    fileBrowserViewController_ = [[FileBrowserViewController alloc] initWithCredentials:credentials_];
+	[fileBrowserViewController_.view setFrame:CGRectMake(300, 0, self.view.frame.size.width-300, self.view.frame.size.height)];
+	[fileBrowserViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin];
+	[self.view addSubview:fileBrowserViewController_.view];
 }
 
 
@@ -61,6 +67,9 @@
 
     [repositoryListViewController_ release];
     repositoryListViewController_ = nil;
+    
+    [fileBrowserViewController_ release];
+    fileBrowserViewController_ = nil;
 }
 
 
