@@ -29,12 +29,12 @@
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
 
 	repositoryListViewController_ = [[RepositoryListViewController alloc] initWithCredentials:credentials_];
-	[repositoryListViewController_.view setFrame:CGRectMake(0, 0, 300, self.view.frame.size.height)];
+	[repositoryListViewController_.view setFrame:CGRectMake(0, 0, 250, self.view.frame.size.height)];
 	[repositoryListViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin];
 	[self.view addSubview:repositoryListViewController_.view];
     
     fileBrowserViewController_ = [[FileBrowserViewController alloc] initWithCredentials:credentials_];
-	[fileBrowserViewController_.view setFrame:CGRectMake(300, 0, self.view.frame.size.width-300, self.view.frame.size.height)];
+	[fileBrowserViewController_.view setFrame:CGRectMake(250, 0, self.view.frame.size.width-250, self.view.frame.size.height)];
 	[fileBrowserViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin];
 	[self.view addSubview:fileBrowserViewController_.view];
 }

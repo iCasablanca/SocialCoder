@@ -6,7 +6,6 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
 @class UserInfoHeaderView;

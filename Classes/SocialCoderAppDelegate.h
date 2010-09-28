@@ -6,8 +6,6 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
 
 @class ProfileViewController;
 @class RepositoriesViewController;
