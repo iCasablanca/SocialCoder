@@ -10,14 +10,18 @@
 #import <MessageUI/MessageUI.h>
 
 @class UserInfoHeaderView;
+@class ProfileViewController;
 
 @interface UserInfoViewController : UITableViewController<MFMailComposeViewControllerDelegate> {
+    ProfileViewController *profileViewController;
 @private
 	UserInfoHeaderView *userInfoHeaderView_;
     NSMutableData *receivedData_;
     NSMutableArray *tableData_;
     NSArray *credentials_;
 }
+
+@property(nonatomic, assign)ProfileViewController *profileViewController;
 
 - (id)initWithCredentials:(NSArray *)credentials;
 

@@ -13,6 +13,7 @@
 
 @implementation UserInfoViewController
 
+@synthesize profileViewController;
 
 #pragma mark -
 #pragma mark Initialization
@@ -189,11 +190,11 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    [[cell textLabel] setText:[[tableData_ objectAtIndex:1] objectAtIndex:indexPath.row]];
-    [[cell detailTextLabel] setText:[[tableData_ objectAtIndex:0] objectAtIndex:indexPath.row]];
+    [[cell textLabel] setText:[[tableData_ objectAtIndex:0] objectAtIndex:indexPath.row]];
+    [[cell detailTextLabel] setText:[[tableData_ objectAtIndex:1] objectAtIndex:indexPath.row]];
     [cell setBackgroundColor:[UIColor colorWithRed:0.8 green:0.9 blue:0.8 alpha:1.0]];
     return cell;
 }
@@ -248,7 +249,7 @@
         [mailController setMailComposeDelegate:self];
         [mailController setToRecipients:[NSArray arrayWithObject:[[tableData_ objectAtIndex:1] objectAtIndex:indexPath.row]]];
         [mailController setModalPresentationStyle:UIModalPresentationFormSheet];
-        [self presentModalViewController:mailController animated:YES];
+        [profileViewController presentModalViewController:mailController animated:YES];
         [mailController release];   
     }
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -256,7 +257,7 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error  {
     [self becomeFirstResponder];
-    [self dismissModalViewControllerAnimated:YES];
+    [profileViewController dismissModalViewControllerAnimated:YES];
 }
 
 

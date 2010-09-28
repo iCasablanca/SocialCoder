@@ -28,6 +28,7 @@
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]];
 	
 	userInfoViewController_ = [[UserInfoViewController alloc] initWithCredentials:credentials_];
+    [userInfoViewController_ setProfileViewController:self];
 	[userInfoViewController_.view setFrame:CGRectMake(0, 0, 300, self.view.frame.size.height)];
 	[userInfoViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin];
 	[self.view addSubview:userInfoViewController_.view];
