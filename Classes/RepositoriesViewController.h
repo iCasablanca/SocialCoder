@@ -10,11 +10,14 @@
 @class FileBrowserViewController;
 
 @interface RepositoriesViewController : UIViewController {
+	FileBrowserViewController *fileBrowserViewController_;
+	
 @private
     RepositoryListViewController *repositoryListViewController_;
-    FileBrowserViewController *fileBrowserViewController_;
     NSArray *credentials_;
 }
+
+@property(nonatomic, retain)FileBrowserViewController *fileBrowserViewController_;
 
 - (id)initWithCredentials:(NSArray *)credentials;
 

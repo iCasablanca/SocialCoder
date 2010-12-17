@@ -10,11 +10,13 @@
 #import "ProfileViewController.h"
 #import "RepositoriesViewController.h"
 #import "GistsViewController.h"
+#import "LoginViewController.h"
 
 
 @implementation SocialCoderAppDelegate
 
 @synthesize window;
+@synthesize repositoriesViewController_;
 
 
 #pragma mark -
@@ -44,7 +46,11 @@
     [repositoriesNavigationController release];
 	[gistsNavigationController release];
     
-	[window addSubview:tabBarController_.view];
+	//[window addSubview:tabBarController_.view];
+	
+	LoginViewController *loginViewController = [[LoginViewController alloc] init];
+	[window addSubview:loginViewController.view];
+	
     [window makeKeyAndVisible];
     return YES;
 }

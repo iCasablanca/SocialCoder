@@ -12,6 +12,7 @@
 
 @implementation RepositoriesViewController
 
+@synthesize fileBrowserViewController_;
 
 - (id)initWithCredentials:(NSArray *)credentials {
     if ((self = [super init])) {
@@ -34,6 +35,7 @@
 	[self.view addSubview:repositoryListViewController_.view];
     
     fileBrowserViewController_ = [[FileBrowserViewController alloc] initWithCredentials:credentials_];
+	[fileBrowserViewController_ setRepository:@"codeinbrackets"];
 	[fileBrowserViewController_.view setFrame:CGRectMake(250, 0, self.view.frame.size.width-250, self.view.frame.size.height)];
 	[fileBrowserViewController_.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin];
 	[self.view addSubview:fileBrowserViewController_.view];

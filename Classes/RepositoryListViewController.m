@@ -9,6 +9,9 @@
 #import "RepositoryListViewController.h"
 #import "JSON/JSON.h"
 #import "Base64.h"
+#import "SocialCoderAppDelegate.h"
+#import "RepositoriesViewController.h"
+#import "FileBrowserViewController.h"
 
 @implementation RepositoryListViewController
 
@@ -22,6 +25,18 @@
         credentials_ = [credentials retain];
         
         [self.tableView setRowHeight:100.0];
+		
+		UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.tableView.frame.size.width,50)];
+		[tableHeaderView setBackgroundColor:[UIColor colorWithRed:0.7 green:0.6 blue:0.6 alpha:1.0]];
+		UILabel *titleLabel = [[UILabel alloc] initWithFrame:[tableHeaderView bounds]];
+		[titleLabel setBackgroundColor:[UIColor clearColor]];
+		[titleLabel setText:@"   Repositories (4)"];
+		//[titleLabel setTextAlignment:UITextAlignmentCenter];
+		[titleLabel setFont:[UIFont fontWithName:@"Chalkduster" size:18]];
+		[tableHeaderView addSubview:titleLabel];
+		
+		[self.tableView setTableHeaderView:tableHeaderView];
+		[tableHeaderView release];
         
         tableData_ = [[NSMutableArray alloc] init];
         receivedData_ = [[NSMutableData alloc] init];
@@ -49,13 +64,15 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection  {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSString *jsonString = [[NSString alloc] initWithData:receivedData_ encoding:NSISOLatin1StringEncoding];
+	NSLog(@"%@", jsonString);
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *parsedJson = [parser objectWithString:jsonString];
     [jsonString release];
     [parser release];
     NSArray *repositories = [parsedJson objectForKey:@"repositories"];
     for(NSDictionary *repository in repositories)  {
-        [tableData_ addObject:[repository objectForKey:@"name"]];
+		NSMutableArray *datapoint = [NSMutableArray arrayWithObjects:[repository objectForKey:@"name"], [repository objectForKey:@"description"], nil];
+        [tableData_ addObject:datapoint];
     }
 
     [self.tableView reloadData];
@@ -79,7 +96,7 @@
     [super viewDidLoad];
 
     [self.tableView setBackgroundView:nil];
-    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5]];
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.63 green:0.6 blue:0.6 alpha:1.0]];
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
  
@@ -136,11 +153,18 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    [[cell textLabel] setText:[tableData_ objectAtIndex:indexPath.row]];
+    [[cell textLabel] setText:[[tableData_ objectAtIndex:indexPath.row] objectAtIndex:0]];
+	[[cell detailTextLabel] setTextColor:[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0]];
+	[[cell detailTextLabel] setHighlightedTextColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]];
+	[[cell detailTextLabel] setText:[[tableData_ objectAtIndex:indexPath.row] objectAtIndex:1]];
     [[cell contentView] setBackgroundColor:[UIColor clearColor]];
+	[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+	[[cell textLabel] setTextColor:[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0]];
+	[[cell textLabel] setHighlightedTextColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]];
+	[[cell textLabel] setFont:[UIFont fontWithName:@"Chalkduster" size:16]];
     
     return cell;
 }
@@ -190,6 +214,8 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[[(RepositoriesViewController*)[(SocialCoderAppDelegate*)[[UIApplication sharedApplication] delegate] repositoriesViewController_] fileBrowserViewController_] setRepository:@"socialcoder"];
+	//f[(FileBrowserViewController*)[(RepositoriesViewController*)[[[UIApplication sharedApplication] delegate] rep] fileBrowserViewController_] setRepository:@"socialcoder"];
     // Navigation logic may go here. Create and push another view controller.
 	/*
 	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

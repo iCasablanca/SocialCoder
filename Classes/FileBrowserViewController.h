@@ -12,7 +12,12 @@
     NSMutableData *receivedData_;
     NSMutableArray *tableData_;
     NSArray *credentials_;
+	bool gotSha_;
+	
+	NSString *repository;
 }
+
+@property(nonatomic, retain)NSString *repository;
 
 - (id)initWithCredentials:(NSArray *)credentials;
 

@@ -18,6 +18,9 @@
 		1E4104CC12528FBC007B027A /* FileBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4104CB12528FBC007B027A /* FileBrowserViewController.m */; };
 		1E590578124BFD7A007FAAA9 /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E590577124BFD7A007FAAA9 /* default_avatar.png */; };
 		1E59057C124BFDFA007FAAA9 /* UserInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E59057B124BFDFA007FAAA9 /* UserInfoHeaderView.m */; };
+		1E5B36DC12B4F28E0044ACD9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B36DB12B4F28E0044ACD9 /* LoginViewController.m */; };
+		1E5B36E312B4F3220044ACD9 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B36E212B4F3220044ACD9 /* LoginView.m */; };
+		1E5B376512B50CAE0044ACD9 /* LoginFormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B376412B50CAE0044ACD9 /* LoginFormTableViewController.m */; };
 		1EC8E978124FA13100DCB289 /* GistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E977124FA13100DCB289 /* GistsViewController.m */; };
 		1EC8E993124FB30700DCB289 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98A124FB30700DCB289 /* NSObject+SBJSON.m */; };
 		1EC8E994124FB30700DCB289 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98C124FB30700DCB289 /* NSString+SBJSON.m */; };
@@ -50,6 +53,12 @@
 		1E590577124BFD7A007FAAA9 /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = Images/default_avatar.png; sourceTree = "<group>"; };
 		1E59057A124BFDFA007FAAA9 /* UserInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoHeaderView.h; sourceTree = "<group>"; };
 		1E59057B124BFDFA007FAAA9 /* UserInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoHeaderView.m; sourceTree = "<group>"; };
+		1E5B36DA12B4F28E0044ACD9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1E5B36DB12B4F28E0044ACD9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		1E5B36E112B4F3220044ACD9 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		1E5B36E212B4F3220044ACD9 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		1E5B376312B50CAE0044ACD9 /* LoginFormTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormTableViewController.h; sourceTree = "<group>"; };
+		1E5B376412B50CAE0044ACD9 /* LoginFormTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormTableViewController.m; sourceTree = "<group>"; };
 		1EC8E976124FA13100DCB289 /* GistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GistsViewController.h; sourceTree = "<group>"; };
 		1EC8E977124FA13100DCB289 /* GistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GistsViewController.m; sourceTree = "<group>"; };
 		1EC8E988124FB30700DCB289 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = JSON/JSON.h; sourceTree = "<group>"; };
@@ -104,6 +113,12 @@
 				1EC8E9A8124FB9C600DCB289 /* ProfileView */,
 				1E3EA0501251028F00B7C5B6 /* RepositoryView */,
 				1EC8E9A9124FB9EA00DCB289 /* GistView */,
+				1E5B36DA12B4F28E0044ACD9 /* LoginViewController.h */,
+				1E5B36DB12B4F28E0044ACD9 /* LoginViewController.m */,
+				1E5B36E112B4F3220044ACD9 /* LoginView.h */,
+				1E5B36E212B4F3220044ACD9 /* LoginView.m */,
+				1E5B376312B50CAE0044ACD9 /* LoginFormTableViewController.h */,
+				1E5B376412B50CAE0044ACD9 /* LoginFormTableViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -299,6 +314,9 @@
 				1E3EA06A1251110600B7C5B6 /* RepositoryListViewController.m in Sources */,
 				1E3EA07A12511B2200B7C5B6 /* Base64.m in Sources */,
 				1E4104CC12528FBC007B027A /* FileBrowserViewController.m in Sources */,
+				1E5B36DC12B4F28E0044ACD9 /* LoginViewController.m in Sources */,
+				1E5B36E312B4F3220044ACD9 /* LoginView.m in Sources */,
+				1E5B376512B50CAE0044ACD9 /* LoginFormTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

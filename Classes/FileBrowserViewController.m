@@ -12,6 +12,7 @@
 
 @implementation FileBrowserViewController
 
+@synthesize repository;
 
 #pragma mark -
 #pragma mark Initialization
@@ -19,24 +20,31 @@
 - (id)initWithCredentials:(NSArray *)credentials  {
     if ((self = [super initWithStyle:UITableViewStylePlain])) {
         credentials_ = [credentials retain];
-        
-      //  [self.tableView setRowHeight:100.0];
-        
         tableData_ = [[NSMutableArray alloc] init];
         receivedData_ = [[NSMutableData alloc] init];
-        
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://github.com/api/v2/json/tree/show/%@/socialcoder/c03824401f1756d94f2a", [credentials_ objectAtIndex:0]]];
-        NSMutableString *loginString = (NSMutableString*)[@"" stringByAppendingFormat:@"%@:%@", [credentials_ objectAtIndex:0], [credentials_ objectAtIndex:1]];  
-        char *encodedLoginData = [Base64 encode:[loginString dataUsingEncoding:NSUTF8StringEncoding]];  
-        NSString *authHeader = [NSString stringWithFormat:@"Basic %@", [NSString stringWithUTF8String:encodedLoginData]];  
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:3];     
-        [request addValue:authHeader forHTTPHeaderField:@"Authorization"];  
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        [connection release];
+		gotSha_ = false;
+		repository = @"";
     }
     return self;
 }
+
+- (void)setRepository:(NSString *)aRepository  {
+	if(repository != aRepository && aRepository != nil)  {
+		[repository release];
+		repository = [aRepository retain];
+		gotSha_ = false;
+		
+		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://github.com/api/v2/json/commits/list/%@/%@/master", [credentials_ objectAtIndex:0], repository]];
+        NSMutableString *loginString = (NSMutableString*)[@"" stringByAppendingFormat:@"%@:%@", [credentials_ objectAtIndex:0], [credentials_ objectAtIndex:1]];  
+        char *encodedLoginData = [Base64 encode:[loginString dataUsingEncoding:NSUTF8StringEncoding]];  
+        NSString *authHeader = [NSString stringWithFormat:@"Basic %@", [NSString stringWithUTF8String:encodedLoginData]];  
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:3];    
+		[request addValue:authHeader forHTTPHeaderField:@"Authorization"];  
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        [connection release];
+	}
+}
+
 
 #pragma mark -
 #pragma mark NSURLConnection Delegate Methods
@@ -46,18 +54,36 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection  {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSString *jsonString = [[NSString alloc] initWithData:receivedData_ encoding:NSISOLatin1StringEncoding];
+	[receivedData_ release];
+	receivedData_ = [[NSMutableData alloc] init];
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *parsedJson = [parser objectWithString:jsonString];
     [jsonString release];
     [parser release];
-    NSArray *tree = [parsedJson objectForKey:@"tree"];
-    for(NSDictionary *object in tree)  {
-        [tableData_ addObject:[object objectForKey:@"name"]];
-    }
-    
-    [self.tableView reloadData];
+	
+	if(!gotSha_)  {
+		gotSha_ = true;
+		NSString *sha = [[[parsedJson objectForKey:@"commits"] objectAtIndex:0] objectForKey:@"id"];
+		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://github.com/api/v2/json/tree/show/%@/%@/%@", [credentials_ objectAtIndex:0],repository , sha]];
+		NSMutableString *loginString = (NSMutableString*)[@"" stringByAppendingFormat:@"%@:%@", [credentials_ objectAtIndex:0], [credentials_ objectAtIndex:1]];  
+		char *encodedLoginData = [Base64 encode:[loginString dataUsingEncoding:NSUTF8StringEncoding]];  
+		NSString *authHeader = [NSString stringWithFormat:@"Basic %@", [NSString stringWithUTF8String:encodedLoginData]];  
+		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:3];     
+		[request addValue:authHeader forHTTPHeaderField:@"Authorization"];  
+		NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+		[connection release];
+	}
+	else  {
+		NSArray *tree = [parsedJson objectForKey:@"tree"];
+		for(NSDictionary *object in tree)  {
+			[tableData_ addObject:[object objectForKey:@"name"]];
+		}
+		
+		[self.tableView reloadData];
+	}
+	
+
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error  {
@@ -218,6 +244,7 @@
     [receivedData_ release];
     [tableData_ release];
     [credentials_ release];
+	[repository release];
     [super dealloc];
 }
 
