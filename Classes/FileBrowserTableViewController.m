@@ -1,64 +1,79 @@
 //
-//  LoginFormTableViewController.m
+//  FileBrowserTableViewController.m
 //  SocialCoder
 //
-//  Created by Toni Suter on 12.12.10.
+//  Created by Toni Suter on 25.12.10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "LoginFormTableViewController.h"
+#import "FileBrowserTableViewController.h"
+#import "GitHubCommitServiceFactory.h"
+#import "GitHubService.h"
+#import "GitHubObjectServiceFactory.h"
 
+@implementation FileBrowserTableViewController
 
-@implementation LoginFormTableViewController
-
-@synthesize username;
-@synthesize password;
-
+@synthesize repository;
+@synthesize tableData;
 
 #pragma mark -
 #pragma mark Initialization
 
-
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-
+- (id)initWithRepository:(NSString *)repo {
+    self = [super init];
     if (self) {
-		[self.tableView setBackgroundView:nil];
-		[self.tableView setScrollEnabled:NO];
+		self.repository = repo;
+		[self setTitle:self.repository];
+		[self.tableView setRowHeight:50];
+		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
+		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
 		
-		username = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
-		[username setPlaceholder:@"john.appleseed"];
-		[username setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-		[username setAutocorrectionType:UITextAutocorrectionTypeNo];
-		[username setText:@"tonisuter"]; //debug
-
-		password = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
-		[password setSecureTextEntry:YES];
-		[password setPlaceholder:@"required"];
+		[GitHubCommitServiceFactory requestCommitsOnBranch:@"master" 
+												repository:self.repository 
+													  user:@"tonisuter" 
+												  delegate:self];
+				
+		self.tableData = [[NSMutableArray alloc] init];
 	}
     return self;
 }
 
 
+-(void)gitHubService:(id<GitHubService>)gitHubService gotCommit:(id<GitHubCommit>)commit  {
+	[gitHubService cancelRequest];
+	[GitHubObjectServiceFactory requestTreeItemsByTreeSha:[commit sha] 
+													 user:@"tonisuter" 
+											   repository:self.repository
+												 delegate:self];
+}
+
+-(void)gitHubService:(id<GitHubService>)gitHubService gotTreeItem:(id<GitHubTreeItem>)treeItem  {
+	[tableData addObject:treeItem];
+}
+
+-(void)gitHubService:(id<GitHubService>)gitHubService didFailWithError:(NSError *)error  {
+	
+}
+
+-(void)gitHubServiceDone:(id<GitHubService>)gitHubService  {
+	[self.tableView reloadData];
+}
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
-- (void)loadView  {
-	[super loadView];
-	[self.view setFrame:CGRectMake(self.view.frame.size.width-450,self.view.frame.size.height/2-55,350,110)];
-	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-}
-
+/*
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+*/
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,34 +114,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    return [tableData count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
+	static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	if(indexPath.row == 0)  {
-		[[cell textLabel] setText:@"Username"];
-		[username setCenter:CGPointMake(220, cell.frame.size.height/2)];
-		[cell addSubview:username];
+	[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] name]];
+	if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
+		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 	}
-	else if(indexPath.row == 1)  {
-		[[cell textLabel] setText:@"Password"];
-		[password setCenter:CGPointMake(220, cell.frame.size.height/2)];
-		[cell addSubview:password];
+	else  {
+		[cell setAccessoryType:UITableViewCellAccessoryNone];
 	}
-	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	
-    // Configure the cell...
-    
     return cell;
 }
 
@@ -203,8 +211,8 @@
 
 
 - (void)dealloc {
-	[username release];
-	[password release];
+	[repository release];
+	[tableData release];
     [super dealloc];
 }
 

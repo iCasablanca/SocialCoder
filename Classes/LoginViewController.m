@@ -9,8 +9,19 @@
 #import "LoginViewController.h"
 #import "LoginView.h"
 #import "LoginFormTableViewController.h"
+#import "GitHubServiceSettings.h"
+#import "MenuTableViewController.h"
+#import "ContentViewController.h"
 
 @implementation LoginViewController
+
+@synthesize loginForm;
+@synthesize logo;
+@synthesize loginButton;
+
+@synthesize menuTable;
+@synthesize contentView;
+
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
@@ -26,13 +37,64 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
-	[super loadView];
-	self.view = [[LoginView alloc] initWithFrame:self.view.bounds];
-	loginForm = [[LoginFormTableViewController alloc] init];
+	self.view = [[LoginView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+	loginForm = [[LoginFormTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.view addSubview:loginForm.view];
-	//[self.view release];
-	//self.view = loginView;
+	
+	logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"github.png"]];
+	[logo setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
+	[logo setCenter:CGPointMake(self.view.frame.size.width/2-140, self.view.frame.size.height/2)];
+	[self.view addSubview:logo];
+	
+	loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[loginButton setTitle:@"Login" forState:UIControlStateNormal];
+	[loginButton sizeToFit];
+	[loginButton setCenter:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2+100)];
+	[loginButton setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
+	[loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:loginButton];
+	
+	menuTable = [[MenuTableViewController alloc] init];
+	[menuTable.view setFrame:CGRectMake(0,0,200,self.view.frame.size.height)];
+	[menuTable.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
+	[menuTable.view setHidden:YES];
+	[menuTable.view setAlpha:0.0];
+	
+	contentView = [[ContentViewController alloc] init];
+	[self.view addSubview:contentView.view];
+	
+	[menuTable setMenuDelegate:contentView];
+}
 
+- (void)login:(id)sender  {
+	NSURLCredential *credential = [NSURLCredential credentialWithUser:[[loginForm username] text] 
+															 password:[[loginForm password] text]
+														  persistence:NSURLCredentialPersistenceNone];
+	[GitHubServiceSettings setCredential:credential];
+	
+	[self.view addSubview:menuTable.view];
+	[menuTable.view setHidden:NO];
+	[contentView.view setHidden:NO];
+	
+	[UIView beginAnimations:@"test" context:nil];
+	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(loggedIn:)];
+	[loginForm.view setAlpha:0.0];
+	[logo setAlpha:0.0];
+	[loginButton setAlpha:0.0];
+	[menuTable.view setAlpha:1.0];
+	[contentView.view setAlpha:1.0];
+	[UIView commitAnimations];
+}
+
+- (void)loggedIn:(id)sender  {
+	[loginForm.view removeFromSuperview];
+	[logo removeFromSuperview];
+	[loginButton removeFromSuperview];
+	[menuTable.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+	NSLog(@"LoggedIn");
 }
 
 
@@ -66,6 +128,11 @@
 
 
 - (void)dealloc {
+	[loginForm release];
+	[logo release];
+	[loginButton release];
+	[menuTable release];
+	[contentView release];
     [super dealloc];
 }
 

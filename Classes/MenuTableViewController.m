@@ -1,41 +1,27 @@
 //
-//  LoginFormTableViewController.m
+//  MenuTableViewController.m
 //  SocialCoder
 //
-//  Created by Toni Suter on 12.12.10.
+//  Created by Toni Suter on 17.12.10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "LoginFormTableViewController.h"
+#import "MenuTableViewController.h"
 
 
-@implementation LoginFormTableViewController
+@implementation MenuTableViewController
 
-@synthesize username;
-@synthesize password;
-
+@synthesize menuDelegate;
 
 #pragma mark -
 #pragma mark Initialization
 
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-
+- (id)init  {
+    self = [super init];
     if (self) {
-		[self.tableView setBackgroundView:nil];
-		[self.tableView setScrollEnabled:NO];
-		
-		username = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
-		[username setPlaceholder:@"john.appleseed"];
-		[username setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-		[username setAutocorrectionType:UITextAutocorrectionTypeNo];
-		[username setText:@"tonisuter"]; //debug
-
-		password = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
-		[password setSecureTextEntry:YES];
-		[password setPlaceholder:@"required"];
-	}
+		[self.view setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.3]];
+    }
     return self;
 }
 
@@ -44,32 +30,31 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-- (void)loadView  {
-	[super loadView];
-	[self.view setFrame:CGRectMake(self.view.frame.size.width-450,self.view.frame.size.height/2-55,350,110)];
-	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
+	//self.clearsSelectionOnViewWillAppear = NO;
+	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
-*/
-/*
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -99,7 +84,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    return 4;
 }
 
 
@@ -112,20 +97,21 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-	if(indexPath.row == 0)  {
-		[[cell textLabel] setText:@"Username"];
-		[username setCenter:CGPointMake(220, cell.frame.size.height/2)];
-		[cell addSubview:username];
-	}
-	else if(indexPath.row == 1)  {
-		[[cell textLabel] setText:@"Password"];
-		[password setCenter:CGPointMake(220, cell.frame.size.height/2)];
-		[cell addSubview:password];
-	}
-	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	
-    // Configure the cell...
+	if(indexPath.row == 0)  {
+		[[cell textLabel] setText:@"Feed"];
+	}
+	else  if(indexPath.row == 1)  {
+		[[cell textLabel] setText:@"Repositories"];
+	}
+	else  if(indexPath.row == 2)  {
+		[[cell textLabel] setText:@"Gists"];
+	}
+	else  if(indexPath.row == 3)  {
+		[[cell textLabel] setText:@"Search"];
+	}
+	
+	[[cell textLabel] setTextColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]];
     
     return cell;
 }
@@ -175,14 +161,7 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-	 */
+	[menuDelegate menuDidChange:indexPath.row];
 }
 
 
@@ -203,8 +182,6 @@
 
 
 - (void)dealloc {
-	[username release];
-	[password release];
     [super dealloc];
 }
 

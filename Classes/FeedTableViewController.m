@@ -1,41 +1,26 @@
 //
-//  LoginFormTableViewController.m
+//  FeedTableViewController.m
 //  SocialCoder
 //
-//  Created by Toni Suter on 12.12.10.
+//  Created by Toni Suter on 18.12.10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "LoginFormTableViewController.h"
+#import "FeedTableViewController.h"
 
 
-@implementation LoginFormTableViewController
-
-@synthesize username;
-@synthesize password;
+@implementation FeedTableViewController
 
 
 #pragma mark -
 #pragma mark Initialization
 
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-
+- (id)init {
+    self = [super init];
     if (self) {
-		[self.tableView setBackgroundView:nil];
-		[self.tableView setScrollEnabled:NO];
-		
-		username = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
-		[username setPlaceholder:@"john.appleseed"];
-		[username setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-		[username setAutocorrectionType:UITextAutocorrectionTypeNo];
-		[username setText:@"tonisuter"]; //debug
-
-		password = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
-		[password setSecureTextEntry:YES];
-		[password setPlaceholder:@"required"];
-	}
+		[self setTitle:@"Feed"];
+    }
     return self;
 }
 
@@ -44,21 +29,17 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-- (void)loadView  {
-	[super loadView];
-	[self.view setFrame:CGRectMake(self.view.frame.size.width-450,self.view.frame.size.height/2-55,350,110)];
-	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-}
-
+/*
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+*/
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    return 1;
 }
 
 
@@ -113,18 +94,6 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	if(indexPath.row == 0)  {
-		[[cell textLabel] setText:@"Username"];
-		[username setCenter:CGPointMake(220, cell.frame.size.height/2)];
-		[cell addSubview:username];
-	}
-	else if(indexPath.row == 1)  {
-		[[cell textLabel] setText:@"Password"];
-		[password setCenter:CGPointMake(220, cell.frame.size.height/2)];
-		[cell addSubview:password];
-	}
-	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-	
     // Configure the cell...
     
     return cell;
@@ -203,8 +172,6 @@
 
 
 - (void)dealloc {
-	[username release];
-	[password release];
     [super dealloc];
 }
 

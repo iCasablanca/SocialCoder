@@ -7,54 +7,25 @@
 //
 
 #import "SocialCoderAppDelegate.h"
-#import "ProfileViewController.h"
-#import "RepositoriesViewController.h"
-#import "GistsViewController.h"
 #import "LoginViewController.h"
 
 
 @implementation SocialCoderAppDelegate
 
 @synthesize window;
-@synthesize repositoriesViewController_;
-
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	
-    NSArray *credentials = [NSArray arrayWithObjects:@"tonisuter", @"_", nil];
-    
-	profileViewController_ = [[ProfileViewController alloc] initWithCredentials:credentials];
-	UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController_];
-	
-    repositoriesViewController_ = [[RepositoriesViewController alloc] initWithCredentials:credentials];
-	UINavigationController *repositoriesNavigationController = [[UINavigationController alloc] initWithRootViewController:repositoriesViewController_];
-    
-    gistsViewController_ = [[GistsViewController alloc] initWithCredentials:credentials];
-    UINavigationController *gistsNavigationController = [[UINavigationController alloc] initWithRootViewController:gistsViewController_];
-    
-	tabBarController_ = [[UITabBarController alloc] init];
-	[tabBarController_ setViewControllers:[NSArray arrayWithObjects:
-                                           profileNavigationController, 
-                                           repositoriesNavigationController, 
-                                           gistsNavigationController, 
-                                           nil]];
-	[profileNavigationController release];
-    [repositoriesNavigationController release];
-	[gistsNavigationController release];
-    
-	//[window addSubview:tabBarController_.view];
-	
+    	
 	LoginViewController *loginViewController = [[LoginViewController alloc] init];
 	[window addSubview:loginViewController.view];
-	
     [window makeKeyAndVisible];
+	
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
@@ -193,10 +164,6 @@
     [managedObjectContext_ release];
     [managedObjectModel_ release];
     [persistentStoreCoordinator_ release];
-    [tabBarController_ release];
-	[profileViewController_ release];
-    [repositoriesViewController_ release];
-	[gistsViewController_ release];
     [window release];
     [super dealloc];
 }

@@ -9,11 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @class LoginFormTableViewController;
+@class MenuTableViewController;
+@class ContentViewController;
 
 @interface LoginViewController : UIViewController {
 	LoginFormTableViewController *loginForm;
+	UIImageView *logo;
+	UIButton *loginButton;
+	
+	MenuTableViewController *menuTable;
+	ContentViewController *contentView;
 }
 
 @property(nonatomic, retain)LoginFormTableViewController *loginForm;
+@property(nonatomic, retain)UIImageView *logo;
+@property(nonatomic, retain)UIButton *loginButton;
+
+@property(nonatomic, retain)MenuTableViewController *menuTable;
+@property(nonatomic, retain)ContentViewController *contentView;
 
 @end
