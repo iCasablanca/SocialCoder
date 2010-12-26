@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "GitHubServiceGotCommitDelegate.h"
-#import "GitHubServiceGotTreeItemDelegate.h"
+#import "GitHubServiceGotBlobDelegate.h"
 
-@interface FileBrowserTableViewController : UITableViewController<GitHubServiceGotCommitDelegate, GitHubServiceGotTreeItemDelegate> {
+@interface FileBrowserTableViewController : UITableViewController<GitHubServiceGotCommitDelegate, GitHubServiceGotBlobDelegate> {
 	NSString *repository;
 	NSMutableArray *tableData;
+	UIPopoverController *branchPicker;
 }
 
 @property(nonatomic, retain)NSString *repository;
 @property(nonatomic, retain)NSMutableArray *tableData;
+@property(nonatomic, retain)UIPopoverController *branchPicker;
 
 - (id)initWithRepository:(NSString *)repo;
 

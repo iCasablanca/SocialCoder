@@ -1,79 +1,48 @@
 //
-//  FileBrowserTableViewController.m
+//  BranchPickerTableViewController.m
 //  SocialCoder
 //
-//  Created by Toni Suter on 25.12.10.
+//  Created by Toni Suter on 26.12.10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "FileBrowserTableViewController.h"
-#import "GitHubCommitServiceFactory.h"
-#import "GitHubService.h"
-#import "GitHubServiceSettings.h"
-#import "GitHubObjectServiceFactory.h"
 #import "BranchPickerTableViewController.h"
+#import "GitHubRepositoryServiceFactory.h"
+#import "GitHubServiceSettings.h"
 
-@implementation FileBrowserTableViewController
+@implementation BranchPickerTableViewController
 
-@synthesize repository;
 @synthesize tableData;
-@synthesize branchPicker;
 
 #pragma mark -
 #pragma mark Initialization
 
-- (id)initWithRepository:(NSString *)repo {
-    self = [super init];
-    if (self) {
-		self.repository = repo;
-		[self setTitle:self.repository];
-		[self.tableView setRowHeight:50];
-		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
-		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
+- (id)initWithRepository:(NSString *)repo  {
+	self = [super init];
+	if(self)  {
+		[self.view setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.9 alpha:1.0]];
+		[self setContentSizeForViewInPopover:CGSizeMake(200, 135)];
+
 		
-		[GitHubCommitServiceFactory requestCommitsOnBranch:@"master" 
-													  path:@"/app"
-												repository:self.repository  
-													  user:[[GitHubServiceSettings credential] user] 
-												  delegate:self];
-				
-		self.tableData = [[NSMutableArray alloc] init];
-		
-		[[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
-																								   target:self 
-																								   action:@selector(chooseBranch:)]];
-		
-		BranchPickerTableViewController *branchPickerTableView = [[BranchPickerTableViewController alloc] initWithRepository:self.repository];
-		branchPicker = [[UIPopoverController alloc] initWithContentViewController:branchPickerTableView];
-		[branchPickerTableView release];
+		tableData = [[NSMutableArray alloc] initWithObjects:
+					 [NSMutableArray array],
+					 [NSMutableArray array],
+					 nil];
+		[GitHubRepositoryServiceFactory requestBranchesByName:repo 
+														 user:[[GitHubServiceSettings credential] user] 
+													 delegate:self];
 	}
-    return self;
+	return self;
 }
 
-- (void)chooseBranch:(id)sender  {
-	[branchPicker presentPopoverFromBarButtonItem:[self.navigationItem rightBarButtonItem] 
-					permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-}
-
-
--(void)gitHubService:(id<GitHubService>)gitHubService gotCommit:(id<GitHubCommit>)commit  {
-	[gitHubService cancelRequest];
-	NSLog(@"%@", [commit sha]);
-	[GitHubObjectServiceFactory requestBlobByTreeSha:[commit sha]  
-												user:[[GitHubServiceSettings credential] user] 
-										  repository:self.repository 
-												path:@"/app" 
-											delegate:self];
-}
-
--(void)gitHubService:(id<GitHubService>)gitHubService gotTreeItem:(id<GitHubTreeItem>)treeItem  {
-	[tableData addObject:treeItem];
-		NSLog(@"tree");
-}
-
--(void)gitHubService:(id<GitHubService>)gitHubService gotBlob:(id<GitHubBlob>)blob  {
-	[tableData addObject:blob];
-	NSLog(@"%@", [blob name]);
+-(void)gitHubService:(id<GitHubService>)gitHubService gotBranch:(id<GitHubBranch>)branch  {
+	[[tableData objectAtIndex:0] addObject:branch];
+	if([[tableData objectAtIndex:1] count] == 0)  {
+		[[tableData objectAtIndex:1] addObject:[NSNumber numberWithBool:YES]];
+	}
+	else  {
+		[[tableData objectAtIndex:1] addObject:[NSNumber numberWithBool:NO]];
+	}
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService didFailWithError:(NSError *)error  {
@@ -81,9 +50,10 @@
 }
 
 -(void)gitHubServiceDone:(id<GitHubService>)gitHubService  {
+	
 	[self.tableView reloadData];
-	NSLog(@"done");
 }
+
 
 
 #pragma mark -
@@ -140,27 +110,28 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [tableData count];
+    return [[tableData objectAtIndex:0] count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *CellIdentifier = @"Cell";
+    
+    static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] name]];
-//	if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
-//		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-//	}
-//	else  {
-//		[cell setAccessoryType:UITableViewCellAccessoryNone];
-//	}
-	
+	[[cell textLabel] setText:[[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] name]];
+	if([[[tableData objectAtIndex:1] objectAtIndex:indexPath.row] boolValue])  {
+		[cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+	}
+	else  {
+		[cell setAccessoryType:UITableViewCellAccessoryNone];
+	}
+    
     return cell;
 }
 
@@ -209,14 +180,12 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-	 */
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	for(int i = 0; i < [[tableData objectAtIndex:1] count]; i++)  {
+		[[tableData objectAtIndex:1] replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
+	}
+	[[tableData objectAtIndex:1] replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
+	[tableView reloadData];
 }
 
 
@@ -237,9 +206,7 @@
 
 
 - (void)dealloc {
-	[repository release];
 	[tableData release];
-	[branchPicker release];
     [super dealloc];
 }
 

@@ -14,6 +14,7 @@
 		1E1C2F7A12C55CDD00B35DDC /* GistsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C2F7912C55CDD00B35DDC /* GistsTableViewController.m */; };
 		1E1C2F7D12C55CF200B35DDC /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C2F7C12C55CF200B35DDC /* SearchTableViewController.m */; };
 		1E1C2FC112C55FAC00B35DDC /* FileBrowserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C2FC012C55FAC00B35DDC /* FileBrowserTableViewController.m */; };
+		1E1C312F12C74CC300B35DDC /* BranchPickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C312E12C74CC300B35DDC /* BranchPickerTableViewController.m */; };
 		1E269BBB12BE586A005A3289 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E269BBA12BE586A005A3289 /* RepositoryCell.m */; };
 		1E269C8E12BE6845005A3289 /* forks.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E269C8C12BE6845005A3289 /* forks.png */; };
 		1E269C8F12BE6845005A3289 /* watchers.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E269C8D12BE6845005A3289 /* watchers.png */; };
@@ -84,6 +85,8 @@
 		1E1C2F7C12C55CF200B35DDC /* SearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewController.m; sourceTree = "<group>"; };
 		1E1C2FBF12C55FAC00B35DDC /* FileBrowserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileBrowserTableViewController.h; sourceTree = "<group>"; };
 		1E1C2FC012C55FAC00B35DDC /* FileBrowserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBrowserTableViewController.m; sourceTree = "<group>"; };
+		1E1C312D12C74CC300B35DDC /* BranchPickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchPickerTableViewController.h; sourceTree = "<group>"; };
+		1E1C312E12C74CC300B35DDC /* BranchPickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchPickerTableViewController.m; sourceTree = "<group>"; };
 		1E269BB912BE586A005A3289 /* RepositoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoryCell.h; sourceTree = "<group>"; };
 		1E269BBA12BE586A005A3289 /* RepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryCell.m; sourceTree = "<group>"; };
 		1E269C8C12BE6845005A3289 /* forks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forks.png; path = Images/forks.png; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 				1E269BBA12BE586A005A3289 /* RepositoryCell.m */,
 				1E1C2FBF12C55FAC00B35DDC /* FileBrowserTableViewController.h */,
 				1E1C2FC012C55FAC00B35DDC /* FileBrowserTableViewController.m */,
+				1E1C312D12C74CC300B35DDC /* BranchPickerTableViewController.h */,
+				1E1C312E12C74CC300B35DDC /* BranchPickerTableViewController.m */,
 			);
 			name = Repositories;
 			sourceTree = "<group>";
@@ -655,6 +660,7 @@
 				1E1C2F7A12C55CDD00B35DDC /* GistsTableViewController.m in Sources */,
 				1E1C2F7D12C55CF200B35DDC /* SearchTableViewController.m in Sources */,
 				1E1C2FC112C55FAC00B35DDC /* FileBrowserTableViewController.m in Sources */,
+				1E1C312F12C74CC300B35DDC /* BranchPickerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
