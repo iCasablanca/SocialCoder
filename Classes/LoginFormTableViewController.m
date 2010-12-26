@@ -31,12 +31,32 @@
 		[username setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		[username setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[username setText:@"tonisuter"]; //debug
+		[username setReturnKeyType:UIReturnKeyNext];
+		[username setDelegate:self];
 
 		password = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
 		[password setSecureTextEntry:YES];
 		[password setPlaceholder:@"required"];
+		[password setReturnKeyType:UIReturnKeyDone];
+		[password setDelegate:self];
 	}
     return self;
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField  {
+	if(textField == username)  {
+		[password becomeFirstResponder];
+	}
+	else if(textField == password)  {
+		//call login method
+	}
+	return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField  {
+	NSLog(@"move everything up");
+	return YES;
 }
 
 

@@ -20,7 +20,14 @@
 - (id)init  {
     self = [super init];
     if (self) {
-		[self.view setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.3]];
+		[self.view setBackgroundColor:[UIColor clearColor]];
+		UIView *bg = [[UIView alloc] initWithFrame:self.tableView.backgroundView.bounds];
+		[bg setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"texture2.png"]]];
+		[self.tableView setBackgroundView:bg];
+		UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.tableView.frame.size.width, 70)];
+		[self.tableView setTableHeaderView:headerView];
+	
+		[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     }
     return self;
 }
@@ -98,6 +105,19 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	
+	
+	UIImageView *bg = [[UIImageView alloc] initWithFrame:[cell bounds]];
+	[bg setImage:[UIImage imageNamed:@"rowBackground.png"]];
+	[cell setBackgroundView:bg];
+	[bg release];
+	
+	UIImageView *bgSelected = [[UIImageView alloc] initWithFrame:[cell bounds]];
+	[bgSelected setImage:[UIImage imageNamed:@"rowBackgroundSelected.png"]];
+	[cell setSelectedBackgroundView:bgSelected];
+	[bgSelected release];
+	
+
+	
 	if(indexPath.row == 0)  {
 		[[cell textLabel] setText:@"Feed"];
 	}
@@ -111,7 +131,7 @@
 		[[cell textLabel] setText:@"Search"];
 	}
 	
-	[[cell textLabel] setTextColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]];
+	//[[cell textLabel] setTextColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]];
     
     return cell;
 }

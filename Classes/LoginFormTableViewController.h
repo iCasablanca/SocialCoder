@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LoginFormTableViewController : UITableViewController {
+@interface LoginFormTableViewController : UITableViewController<UITextFieldDelegate> {
 	UITextField *username;
 	UITextField *password;
 }

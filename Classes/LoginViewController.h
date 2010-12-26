@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GitHubServiceGotUserDelegate.h"
 
 @class LoginFormTableViewController;
 @class MenuTableViewController;
 @class ContentViewController;
 
-@interface LoginViewController : UIViewController {
+@interface LoginViewController : UIViewController<GitHubServiceGotUserDelegate> {
 	LoginFormTableViewController *loginForm;
 	UIImageView *logo;
 	UIButton *loginButton;

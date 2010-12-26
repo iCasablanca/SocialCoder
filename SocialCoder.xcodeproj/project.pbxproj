@@ -15,6 +15,10 @@
 		1E1C2F7D12C55CF200B35DDC /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C2F7C12C55CF200B35DDC /* SearchTableViewController.m */; };
 		1E1C2FC112C55FAC00B35DDC /* FileBrowserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C2FC012C55FAC00B35DDC /* FileBrowserTableViewController.m */; };
 		1E1C312F12C74CC300B35DDC /* BranchPickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C312E12C74CC300B35DDC /* BranchPickerTableViewController.m */; };
+		1E1C328B12C7EE1800B35DDC /* texture1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1C328A12C7EE1800B35DDC /* texture1.png */; };
+		1E1C32A112C7EFB000B35DDC /* rowBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1C329F12C7EFB000B35DDC /* rowBackground.png */; };
+		1E1C32A212C7EFB000B35DDC /* rowBackgroundSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1C32A012C7EFB000B35DDC /* rowBackgroundSelected.png */; };
+		1E1C331512C7F8F000B35DDC /* texture2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1C331412C7F8F000B35DDC /* texture2.png */; };
 		1E269BBB12BE586A005A3289 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E269BBA12BE586A005A3289 /* RepositoryCell.m */; };
 		1E269C8E12BE6845005A3289 /* forks.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E269C8C12BE6845005A3289 /* forks.png */; };
 		1E269C8F12BE6845005A3289 /* watchers.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E269C8D12BE6845005A3289 /* watchers.png */; };
@@ -87,6 +91,10 @@
 		1E1C2FC012C55FAC00B35DDC /* FileBrowserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileBrowserTableViewController.m; sourceTree = "<group>"; };
 		1E1C312D12C74CC300B35DDC /* BranchPickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchPickerTableViewController.h; sourceTree = "<group>"; };
 		1E1C312E12C74CC300B35DDC /* BranchPickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchPickerTableViewController.m; sourceTree = "<group>"; };
+		1E1C328A12C7EE1800B35DDC /* texture1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = texture1.png; path = Images/texture1.png; sourceTree = "<group>"; };
+		1E1C329F12C7EFB000B35DDC /* rowBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rowBackground.png; path = Images/rowBackground.png; sourceTree = "<group>"; };
+		1E1C32A012C7EFB000B35DDC /* rowBackgroundSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rowBackgroundSelected.png; path = Images/rowBackgroundSelected.png; sourceTree = "<group>"; };
+		1E1C331412C7F8F000B35DDC /* texture2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = texture2.png; path = Images/texture2.png; sourceTree = "<group>"; };
 		1E269BB912BE586A005A3289 /* RepositoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoryCell.h; sourceTree = "<group>"; };
 		1E269BBA12BE586A005A3289 /* RepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryCell.m; sourceTree = "<group>"; };
 		1E269C8C12BE6845005A3289 /* forks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forks.png; path = Images/forks.png; sourceTree = "<group>"; };
@@ -524,6 +532,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E1C331412C7F8F000B35DDC /* texture2.png */,
+				1E1C329F12C7EFB000B35DDC /* rowBackground.png */,
+				1E1C32A012C7EFB000B35DDC /* rowBackgroundSelected.png */,
+				1E1C328A12C7EE1800B35DDC /* texture1.png */,
 				1E590579124BFD7F007FAAA9 /* Images */,
 				28193054112F811F00ECF9B4 /* SocialCoder.xcdatamodeld */,
 				8D1107310486CEB800E47090 /* SocialCoder-Info.plist */,
@@ -596,6 +608,10 @@
 				1EF58DB112BC050E00754D7E /* github.png in Resources */,
 				1E269C8E12BE6845005A3289 /* forks.png in Resources */,
 				1E269C8F12BE6845005A3289 /* watchers.png in Resources */,
+				1E1C328B12C7EE1800B35DDC /* texture1.png in Resources */,
+				1E1C32A112C7EFB000B35DDC /* rowBackground.png in Resources */,
+				1E1C32A212C7EFB000B35DDC /* rowBackgroundSelected.png in Resources */,
+				1E1C331512C7F8F000B35DDC /* texture2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

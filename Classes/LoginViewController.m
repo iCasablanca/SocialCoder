@@ -12,6 +12,7 @@
 #import "GitHubServiceSettings.h"
 #import "MenuTableViewController.h"
 #import "ContentViewController.h"
+#import "GitHubUserServiceFactory.h"
 
 @implementation LoginViewController
 
@@ -72,6 +73,8 @@
 															 password:[[loginForm password] text]
 														  persistence:NSURLCredentialPersistenceNone];
 	[GitHubServiceSettings setCredential:credential];
+	[GitHubUserServiceFactory requestUserByName:[[loginForm username] text] 
+									   delegate:self];
 	
 	[self.view addSubview:menuTable.view];
 	[menuTable.view setHidden:NO];
@@ -97,6 +100,26 @@
 	NSLog(@"LoggedIn");
 }
 
+-(void)gitHubService:(id<GitHubService>)gitHubService gotUser:(id<GitHubUser>)user  {
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar.php?gravatar_id=%@", [user gravatarId]]];
+	UIImage *avatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+	UIImageView *avatarView = [[UIImageView alloc] initWithImage:avatar];
+	[avatarView setFrame:CGRectMake(10,10,50,50)];
+	[avatarView.layer setCornerRadius:5];
+	[avatarView setClipsToBounds:YES];
+	[avatarView.layer setShadowColor:[UIColor whiteColor].CGColor];
+		[avatarView.layer setShadowOffset:CGSizeMake(0,0)];
+	[avatarView.layer setShadowRadius:5];
+		[avatarView.layer setShadowOpacity:1.0];
+	[menuTable.view addSubview:avatarView];
+}
+
+-(void)gitHubService:(id<GitHubService>)gitHubService didFailWithError:(NSError *)error  {
+	
+}
+
+-(void)gitHubServiceDone:(id<GitHubService>)gitHubService  {
+}
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

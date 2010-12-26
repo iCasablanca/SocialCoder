@@ -46,6 +46,13 @@
 		BranchPickerTableViewController *branchPickerTableView = [[BranchPickerTableViewController alloc] initWithRepository:self.repository];
 		branchPicker = [[UIPopoverController alloc] initWithContentViewController:branchPickerTableView];
 		[branchPickerTableView release];
+		
+		UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Source", @"Commits", @"Issues", nil]];
+		[segmentedControl setSelectedSegmentIndex:0];
+		[segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+		//[mapViewTypeSelector addTarget:self action:@selector(mapViewTypeChanged:) forControlEvents:UIControlEventValueChanged];
+		[[self navigationItem] setTitleView:segmentedControl];
+		[segmentedControl release];
 	}
     return self;
 }
