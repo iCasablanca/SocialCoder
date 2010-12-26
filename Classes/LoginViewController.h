@@ -12,20 +12,23 @@
 @class LoginFormTableViewController;
 @class MenuTableViewController;
 @class ContentViewController;
+@class LoginView;
 
 @interface LoginViewController : UIViewController<GitHubServiceGotUserDelegate> {
+	LoginView *loginView;
 	LoginFormTableViewController *loginForm;
-	UIImageView *logo;
-	UIButton *loginButton;
+	UIImageView *logo;	
 	
+	UIView *normalView;
 	MenuTableViewController *menuTable;
 	ContentViewController *contentView;
 }
 
+@property(nonatomic, retain)LoginView *loginView;
 @property(nonatomic, retain)LoginFormTableViewController *loginForm;
 @property(nonatomic, retain)UIImageView *logo;
-@property(nonatomic, retain)UIButton *loginButton;
 
+@property(nonatomic, retain)UIView *normalView;
 @property(nonatomic, retain)MenuTableViewController *menuTable;
 @property(nonatomic, retain)ContentViewController *contentView;
 

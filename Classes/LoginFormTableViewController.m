@@ -13,6 +13,7 @@
 
 @synthesize username;
 @synthesize password;
+@synthesize formDelegate;
 
 
 #pragma mark -
@@ -32,12 +33,14 @@
 		[username setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[username setText:@"tonisuter"]; //debug
 		[username setReturnKeyType:UIReturnKeyNext];
+		[username setClearButtonMode:UITextFieldViewModeWhileEditing];
 		[username setDelegate:self];
 
 		password = [[UITextField alloc] initWithFrame:CGRectMake(0,0,200,22)];
 		[password setSecureTextEntry:YES];
 		[password setPlaceholder:@"required"];
 		[password setReturnKeyType:UIReturnKeyDone];
+		[password setClearButtonMode:UITextFieldViewModeWhileEditing];
 		[password setDelegate:self];
 	}
     return self;
@@ -49,7 +52,7 @@
 		[password becomeFirstResponder];
 	}
 	else if(textField == password)  {
-		//call login method
+		[formDelegate login];
 	}
 	return YES;
 }

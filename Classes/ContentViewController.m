@@ -34,9 +34,7 @@
 	CGRect rect = [[UIScreen mainScreen] bounds];
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(210,10,rect.size.width-220, rect.size.height-20)];
 	[self.view.layer setCornerRadius:10];
-	[self.view setBackgroundColor:[UIColor colorWithRed:0.7 green:0.7 blue:0.9 alpha:1.0]];
-	[self.view setHidden:YES];
-	[self.view setAlpha:0.0];
+	[self.view setClipsToBounds:YES];
 	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
 	
 	feedTable = [[FeedTableViewController alloc] init];
@@ -45,7 +43,7 @@
 	searchTable = [[SearchTableViewController alloc] init];
 	
 	navController = [[UINavigationController alloc] initWithRootViewController:feedTable];
-	[navController.view setFrame:CGRectMake(10,10,self.view.frame.size.width-20, self.view.frame.size.height-20)];
+	[navController.view setFrame:[self.view bounds]];
 	[self.view addSubview:navController.view];
 }
 

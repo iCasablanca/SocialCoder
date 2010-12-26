@@ -12,9 +12,11 @@
 @interface LoginFormTableViewController : UITableViewController<UITextFieldDelegate> {
 	UITextField *username;
 	UITextField *password;
+	id formDelegate;
 }
 
 @property(nonatomic, retain)UITextField *username;
 @property(nonatomic, retain)UITextField *password;
+@property(nonatomic, retain)id formDelegate;
 
 @end

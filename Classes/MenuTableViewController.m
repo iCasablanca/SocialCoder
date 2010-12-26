@@ -21,9 +21,6 @@
     self = [super init];
     if (self) {
 		[self.view setBackgroundColor:[UIColor clearColor]];
-		UIView *bg = [[UIView alloc] initWithFrame:self.tableView.backgroundView.bounds];
-		[bg setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"texture2.png"]]];
-		[self.tableView setBackgroundView:bg];
 		UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.tableView.frame.size.width, 70)];
 		[self.tableView setTableHeaderView:headerView];
 	
