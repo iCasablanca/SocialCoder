@@ -206,18 +206,22 @@
 		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] name]];
 		if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
 			[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+			[[cell imageView] setImage:[UIImage imageNamed:@"dir.png"]];
 		}
 		else  {
 			[cell setAccessoryType:UITableViewCellAccessoryNone];
+			[[cell imageView] setImage:[UIImage imageNamed:@"txt.png"]];
 		}
 	}
 	else if([contentPicker selectedSegmentIndex] == 1)  {
 		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] message]];
 		[cell setAccessoryType:UITableViewCellAccessoryNone];
+		[[cell imageView] setImage:nil];
 	}
 	else if([contentPicker selectedSegmentIndex] == 2)  {
 		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] title]];
 		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+		[[cell imageView] setImage:nil];
 	}
 	
     return cell;
