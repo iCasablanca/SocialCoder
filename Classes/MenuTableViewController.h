@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <QuartzCore/QuartzCore.h>
+#import "GitHubUser.h"
 
 @interface MenuTableViewController : UITableViewController {
 	id menuDelegate;
+	id<GitHubUser> user;
 }
 
 @property(nonatomic, assign)id menuDelegate;
+@property(nonatomic, retain)id<GitHubUser> user;
 
 @end

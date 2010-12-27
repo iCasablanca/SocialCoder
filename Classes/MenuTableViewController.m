@@ -12,6 +12,7 @@
 @implementation MenuTableViewController
 
 @synthesize menuDelegate;
+@synthesize user;
 
 #pragma mark -
 #pragma mark Initialization
@@ -27,6 +28,50 @@
 		[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     }
     return self;
+}
+
+- (void)setUser:(id <GitHubUser>)user_  {
+	if(user != user_)  {
+		[user release];
+		user = [user_ retain];
+		
+		//remove all Subviews in the HeaderView
+		for(UIView *sview in [self.tableView.tableHeaderView subviews])  {
+			[sview removeFromSuperview];
+		}
+		
+		UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(12,12,46,46)];
+		[shadowView setBackgroundColor:[UIColor blackColor]];
+		[shadowView.layer setShadowColor:[UIColor blackColor].CGColor];
+		[shadowView.layer setShadowOffset:CGSizeMake(0,0)];
+		[shadowView.layer setShadowOpacity:1.0];
+		[shadowView.layer setShadowRadius:5.0];
+		[self.tableView.tableHeaderView addSubview:shadowView];
+		[shadowView release];
+		
+		//load and add the avatar image
+		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar.php?gravatar_id=%@", [user gravatarId]]];
+		UIImage *avatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+		UIImageView *avatarView = [[UIImageView alloc] initWithImage:avatar];
+		[avatarView setFrame:CGRectMake(10,10,50,50)];
+		[avatarView.layer setCornerRadius:5];
+		[avatarView setClipsToBounds:YES];
+		[self.tableView.tableHeaderView addSubview:avatarView];
+		[avatarView release];
+		
+		UILabel *nameLabel = [[UILabel alloc] init];
+		[nameLabel setFont:[UIFont boldSystemFontOfSize:16]];
+		[nameLabel setTextColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.3 alpha:1.0]];
+		[nameLabel setBackgroundColor:[UIColor clearColor]];
+		[nameLabel setText:[user login]];
+		[nameLabel sizeToFit];
+		[nameLabel setCenter:CGPointMake(nameLabel.frame.size.width/2+70, self.tableView.tableHeaderView.frame.size.height/2)];
+		[nameLabel setShadowColor:[UIColor colorWithRed:0.9 green:0.9 blue:1.0 alpha:1.0]];
+		[nameLabel setShadowOffset:CGSizeMake(0,-1)];
+		[self.tableView.tableHeaderView addSubview:nameLabel];
+		[nameLabel release];
+		
+	}
 }
 
 

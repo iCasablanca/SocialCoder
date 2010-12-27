@@ -33,8 +33,10 @@
 - (void)loadView {
 	CGRect rect = [[UIScreen mainScreen] bounds];
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(210,10,rect.size.width-220, rect.size.height-20)];
-	[self.view.layer setCornerRadius:10];
-	[self.view setClipsToBounds:YES];
+	[self.view.layer setShadowColor:[UIColor blackColor].CGColor];
+	[self.view.layer setShadowOffset:CGSizeMake(0,0)];
+	[self.view.layer setShadowOpacity:1.0];
+	[self.view.layer setShadowRadius:5.0];
 	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
 	
 	feedTable = [[FeedTableViewController alloc] init];
@@ -44,6 +46,9 @@
 	
 	navController = [[UINavigationController alloc] initWithRootViewController:feedTable];
 	[navController.view setFrame:[self.view bounds]];
+	[navController.view.layer setCornerRadius:5.0];
+	[navController.view setClipsToBounds:YES];
+	[[navController navigationBar] setTintColor:[UIColor colorWithRed:0.31 green:0.41 blue:0.48 alpha:1.0]];
 	[self.view addSubview:navController.view];
 }
 

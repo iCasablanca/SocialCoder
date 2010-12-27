@@ -171,3 +171,13 @@
 
 @end
 
+@interface UINavigationBar (MyCustomNavBar)
+@end
+
+@implementation UINavigationBar (MyCustomNavBar)
+- (void) drawRect:(CGRect)rect {
+    UIImage *barImage = [UIImage imageNamed:@"navbarBackground.png"];
+	[barImage drawAsPatternInRect:rect];
+}
+@end
+

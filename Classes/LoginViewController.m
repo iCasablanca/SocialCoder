@@ -83,17 +83,7 @@
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotUser:(id<GitHubUser>)user  {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar.php?gravatar_id=%@", [user gravatarId]]];
-	UIImage *avatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-	UIImageView *avatarView = [[UIImageView alloc] initWithImage:avatar];
-	[avatarView setFrame:CGRectMake(10,10,50,50)];
-	[avatarView.layer setCornerRadius:5];
-	[avatarView setClipsToBounds:YES];
-	[avatarView.layer setShadowColor:[UIColor whiteColor].CGColor];
-		[avatarView.layer setShadowOffset:CGSizeMake(0,0)];
-	[avatarView.layer setShadowRadius:5];
-		[avatarView.layer setShadowOpacity:1.0];
-	[menuTable.view addSubview:avatarView];
+	[menuTable setUser:user];
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService didFailWithError:(NSError *)error  {
