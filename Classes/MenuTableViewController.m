@@ -42,10 +42,10 @@
 		
 		UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(12,12,46,46)];
 		[shadowView setBackgroundColor:[UIColor blackColor]];
-		[shadowView.layer setShadowColor:[UIColor blackColor].CGColor];
-		[shadowView.layer setShadowOffset:CGSizeMake(0,0)];
-		[shadowView.layer setShadowOpacity:1.0];
-		[shadowView.layer setShadowRadius:5.0];
+		//[shadowView.layer setShadowColor:[UIColor blackColor].CGColor];
+		//[shadowView.layer setShadowOffset:CGSizeMake(0,0)];
+		//[shadowView.layer setShadowOpacity:1.0];
+		//[shadowView.layer setShadowRadius:5.0];
 		[self.tableView.tableHeaderView addSubview:shadowView];
 		[shadowView release];
 		

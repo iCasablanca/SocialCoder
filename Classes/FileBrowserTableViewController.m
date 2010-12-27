@@ -12,12 +12,15 @@
 #import "GitHubServiceSettings.h"
 #import "GitHubObjectServiceFactory.h"
 #import "BranchPickerTableViewController.h"
+#import "GitHubIssueServiceFactory.h"
 
 @implementation FileBrowserTableViewController
 
 @synthesize repository;
+@synthesize branch;
 @synthesize tableData;
 @synthesize branchPicker;
+@synthesize contentPicker;
 
 #pragma mark -
 #pragma mark Initialization
@@ -25,19 +28,14 @@
 - (id)initWithRepository:(NSString *)repo {
     self = [super init];
     if (self) {
-		self.repository = repo;
+		[self setRepository:repo];
+		[self setBranch:@"master"];
+		[self setTableData:[NSMutableArray array]];
+
 		[self setTitle:self.repository];
 		[self.tableView setRowHeight:50];
 		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
 		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
-		
-		[GitHubCommitServiceFactory requestCommitsOnBranch:@"master" 
-													  path:@"/app"
-												repository:self.repository  
-													  user:[[GitHubServiceSettings credential] user] 
-												  delegate:self];
-				
-		self.tableData = [[NSMutableArray alloc] init];
 		
 		[[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
 																								   target:self 
@@ -47,15 +45,57 @@
 		branchPicker = [[UIPopoverController alloc] initWithContentViewController:branchPickerTableView];
 		[branchPickerTableView release];
 		
-		UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Source", @"Commits", @"Issues", nil]];
-		[segmentedControl setSelectedSegmentIndex:0];
-		[segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-		//[mapViewTypeSelector addTarget:self action:@selector(mapViewTypeChanged:) forControlEvents:UIControlEventValueChanged];
-		[[self navigationItem] setTitleView:segmentedControl];
-		[segmentedControl release];
+		contentPicker = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
+																   @"Source", 
+																   @"Commits", 
+																   @"Issues", 
+																   nil]];
+		[contentPicker setSelectedSegmentIndex:0];
+		[contentPicker setSegmentedControlStyle:UISegmentedControlStyleBar];
+		[contentPicker addTarget:self action:@selector(tableDataWillChange:) forControlEvents:UIControlEventValueChanged];
+		[[self navigationItem] setTitleView:contentPicker];
+		
+		[self getSource];
 	}
     return self;
 }
+
+- (void)getSource  {
+	[tableData removeAllObjects];
+	[GitHubCommitServiceFactory requestCommitsOnBranch:self.branch
+											repository:self.repository 
+												  user:[[GitHubServiceSettings credential] user] 
+											  delegate:self];
+}
+
+- (void)getCommits  {
+	[tableData removeAllObjects];
+	[GitHubCommitServiceFactory requestCommitsOnBranch:self.branch
+											repository:self.repository 
+												  user:[[GitHubServiceSettings credential] user] 
+											  delegate:self];
+}
+
+- (void)getIssues  {
+	[tableData removeAllObjects];
+	[GitHubIssueServiceFactory requestIssuesForState:GitHubIssueOpen 
+												user:[[GitHubServiceSettings credential] user] 
+										  repository:self.repository 
+											delegate:self];
+}
+
+- (void)tableDataWillChange:(id)sender  {
+	if([sender selectedSegmentIndex] == 0)  {
+		[self getSource];
+	}
+	else if([sender selectedSegmentIndex] == 1)  {
+		[self getCommits];
+	}
+	else if([sender selectedSegmentIndex] == 2)  {
+		[self getIssues];
+	}
+}
+
 
 - (void)chooseBranch:(id)sender  {
 	[branchPicker presentPopoverFromBarButtonItem:[self.navigationItem rightBarButtonItem] 
@@ -64,23 +104,28 @@
 
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotCommit:(id<GitHubCommit>)commit  {
-	[gitHubService cancelRequest];
-	NSLog(@"%@", [commit sha]);
-	[GitHubObjectServiceFactory requestBlobByTreeSha:[commit sha]  
-												user:[[GitHubServiceSettings credential] user] 
-										  repository:self.repository 
-												path:@"/app" 
-											delegate:self];
+	if([contentPicker selectedSegmentIndex] == 0)  {
+		[gitHubService cancelRequest];
+		[GitHubObjectServiceFactory requestTreeItemsByTreeSha:[commit sha] 
+														 user:[[GitHubServiceSettings credential] user] 
+												   repository:self.repository 
+													 delegate:self];
+	}
+	else if([contentPicker selectedSegmentIndex] == 1)  {
+		[tableData addObject:commit];
+	}
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotTreeItem:(id<GitHubTreeItem>)treeItem  {
-	[tableData addObject:treeItem];
-		NSLog(@"tree");
+	if([contentPicker selectedSegmentIndex] == 0)  {
+		[tableData addObject:treeItem];
+	}
 }
 
--(void)gitHubService:(id<GitHubService>)gitHubService gotBlob:(id<GitHubBlob>)blob  {
-	[tableData addObject:blob];
-	NSLog(@"%@", [blob name]);
+-(void)gitHubService:(id<GitHubService>)gitHubService gotIssue:(id<GitHubIssue>)issue  {
+	if([contentPicker selectedSegmentIndex] == 2)  {
+		[tableData addObject:issue];
+	}
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService didFailWithError:(NSError *)error  {
@@ -89,7 +134,6 @@
 
 -(void)gitHubServiceDone:(id<GitHubService>)gitHubService  {
 	[self.tableView reloadData];
-	NSLog(@"done");
 }
 
 
@@ -140,13 +184,11 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return [tableData count];
 }
 
@@ -160,13 +202,23 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] name]];
-//	if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
-//		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-//	}
-//	else  {
-//		[cell setAccessoryType:UITableViewCellAccessoryNone];
-//	}
+	if([contentPicker selectedSegmentIndex] == 0)  {
+		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] name]];
+		if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
+			[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+		}
+		else  {
+			[cell setAccessoryType:UITableViewCellAccessoryNone];
+		}
+	}
+	else if([contentPicker selectedSegmentIndex] == 1)  {
+		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] message]];
+		[cell setAccessoryType:UITableViewCellAccessoryNone];
+	}
+	else if([contentPicker selectedSegmentIndex] == 2)  {
+		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] title]];
+		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+	}
 	
     return cell;
 }
@@ -245,8 +297,10 @@
 
 - (void)dealloc {
 	[repository release];
+	[branch release];
 	[tableData release];
 	[branchPicker release];
+	[contentPicker release];
     [super dealloc];
 }
 

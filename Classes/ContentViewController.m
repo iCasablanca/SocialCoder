@@ -33,10 +33,10 @@
 - (void)loadView {
 	CGRect rect = [[UIScreen mainScreen] bounds];
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(210,10,rect.size.width-220, rect.size.height-20)];
-	[self.view.layer setShadowColor:[UIColor blackColor].CGColor];
-	[self.view.layer setShadowOffset:CGSizeMake(0,0)];
-	[self.view.layer setShadowOpacity:1.0];
-	[self.view.layer setShadowRadius:5.0];
+	//[self.view.layer setShadowColor:[UIColor blackColor].CGColor];
+	//[self.view.layer setShadowOffset:CGSizeMake(0,0)];
+	//[self.view.layer setShadowOpacity:1.0];
+	//[self.view.layer setShadowRadius:5.0];
 	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
 	
 	feedTable = [[FeedTableViewController alloc] init];
