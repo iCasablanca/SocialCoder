@@ -13,6 +13,7 @@
 #import "GitHubObjectServiceFactory.h"
 #import "BranchPickerTableViewController.h"
 #import "GitHubIssueServiceFactory.h"
+#import "CommitCell.h"
 
 @implementation FileBrowserTableViewController
 
@@ -33,7 +34,6 @@
 		[self setTableData:[NSMutableArray array]];
 
 		[self setTitle:self.repository];
-		[self.tableView setRowHeight:50];
 		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
 		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
 		
@@ -62,6 +62,7 @@
 
 - (void)getSource  {
 	[tableData removeAllObjects];
+	[self.tableView setRowHeight:50];
 	[GitHubCommitServiceFactory requestCommitsOnBranch:self.branch
 											repository:self.repository 
 												  user:[[GitHubServiceSettings credential] user] 
@@ -70,6 +71,7 @@
 
 - (void)getCommits  {
 	[tableData removeAllObjects];
+	[self.tableView setRowHeight:100];
 	[GitHubCommitServiceFactory requestCommitsOnBranch:self.branch
 											repository:self.repository 
 												  user:[[GitHubServiceSettings credential] user] 
@@ -78,6 +80,7 @@
 
 - (void)getIssues  {
 	[tableData removeAllObjects];
+	[self.tableView setRowHeight:50];
 	[GitHubIssueServiceFactory requestIssuesForState:GitHubIssueOpen 
 												user:[[GitHubServiceSettings credential] user] 
 										  repository:self.repository 
@@ -104,6 +107,7 @@
 
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotCommit:(id<GitHubCommit>)commit  {
+	NSLog(@"%@", [commit description]);
 	if([contentPicker selectedSegmentIndex] == 0)  {
 		[gitHubService cancelRequest];
 		[GitHubObjectServiceFactory requestTreeItemsByTreeSha:[commit sha] 
@@ -196,13 +200,16 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-	if([contentPicker selectedSegmentIndex] == 0)  {
+	static NSString *CommitCellIdentifier = @"CommitCell";
+	
+	UITableViewCell *cell;
+	
+	if([contentPicker selectedSegmentIndex] == 0)  {		
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+		
 		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] name]];
 		if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
 			[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
@@ -213,12 +220,22 @@
 			[[cell imageView] setImage:[UIImage imageNamed:@"txt.png"]];
 		}
 	}
-	else if([contentPicker selectedSegmentIndex] == 1)  {
-		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] message]];
+	else if([contentPicker selectedSegmentIndex] == 1)  {		
+		cell = (CommitCell *)[tableView dequeueReusableCellWithIdentifier:CommitCellIdentifier];
+		if (cell == nil) {
+			cell = [[[CommitCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommitCellIdentifier] autorelease];
+		}
+		
+		[cell setCommit:[tableData objectAtIndex:indexPath.row]];
 		[cell setAccessoryType:UITableViewCellAccessoryNone];
 		[[cell imageView] setImage:nil];
 	}
-	else if([contentPicker selectedSegmentIndex] == 2)  {
+	else if([contentPicker selectedSegmentIndex] == 2)  {		
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+		
 		[[cell textLabel] setText:[[tableData objectAtIndex:indexPath.row] title]];
 		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 		[[cell imageView] setImage:nil];

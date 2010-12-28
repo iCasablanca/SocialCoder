@@ -31,6 +31,7 @@
 		1E5B376512B50CAE0044ACD9 /* LoginFormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B376412B50CAE0044ACD9 /* LoginFormTableViewController.m */; };
 		1E8644DF12C94F7300F12375 /* dir.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E8644DD12C94F7300F12375 /* dir.png */; };
 		1E8644E012C94F7300F12375 /* txt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E8644DE12C94F7300F12375 /* txt.png */; };
+		1E86450312C9534000F12375 /* CommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E86450212C9534000F12375 /* CommitCell.m */; };
 		1EC8E993124FB30700DCB289 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98A124FB30700DCB289 /* NSObject+SBJSON.m */; };
 		1EC8E994124FB30700DCB289 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98C124FB30700DCB289 /* NSString+SBJSON.m */; };
 		1EC8E995124FB30700DCB289 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98E124FB30700DCB289 /* SBJsonBase.m */; };
@@ -115,6 +116,8 @@
 		1E5B376412B50CAE0044ACD9 /* LoginFormTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormTableViewController.m; sourceTree = "<group>"; };
 		1E8644DD12C94F7300F12375 /* dir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dir.png; path = Images/dir.png; sourceTree = "<group>"; };
 		1E8644DE12C94F7300F12375 /* txt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = txt.png; path = Images/txt.png; sourceTree = "<group>"; };
+		1E86450112C9534000F12375 /* CommitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitCell.h; sourceTree = "<group>"; };
+		1E86450212C9534000F12375 /* CommitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitCell.m; sourceTree = "<group>"; };
 		1EC8E988124FB30700DCB289 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = JSON/JSON.h; sourceTree = "<group>"; };
 		1EC8E989124FB30700DCB289 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJSON.h"; path = "JSON/NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		1EC8E98A124FB30700DCB289 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJSON.m"; path = "JSON/NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -306,6 +309,8 @@
 				1E1C2FC012C55FAC00B35DDC /* FileBrowserTableViewController.m */,
 				1E1C312D12C74CC300B35DDC /* BranchPickerTableViewController.h */,
 				1E1C312E12C74CC300B35DDC /* BranchPickerTableViewController.m */,
+				1E86450112C9534000F12375 /* CommitCell.h */,
+				1E86450212C9534000F12375 /* CommitCell.m */,
 			);
 			name = Repositories;
 			sourceTree = "<group>";
@@ -689,6 +694,7 @@
 				1E1C2F7D12C55CF200B35DDC /* SearchTableViewController.m in Sources */,
 				1E1C2FC112C55FAC00B35DDC /* FileBrowserTableViewController.m in Sources */,
 				1E1C312F12C74CC300B35DDC /* BranchPickerTableViewController.m in Sources */,
+				1E86450312C9534000F12375 /* CommitCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
