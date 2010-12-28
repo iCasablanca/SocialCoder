@@ -14,6 +14,7 @@
 @synthesize commit;
 @synthesize messageLabel;
 @synthesize authorLabel;
+@synthesize committedDateLabel;
 @synthesize commitLabel;
 @synthesize treeLabel;
 @synthesize parentLabel;
@@ -34,6 +35,12 @@
 		[authorLabel setBackgroundColor:[UIColor clearColor]];
 		[authorLabel setTextColor:[UIColor grayColor]];
 		[self addSubview:authorLabel];
+		
+		committedDateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+		[committedDateLabel setFont:[UIFont systemFontOfSize:14]];
+		[committedDateLabel setBackgroundColor:[UIColor clearColor]];
+		[committedDateLabel setTextColor:[UIColor grayColor]];
+		[self addSubview:committedDateLabel];
 		
 		commitLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 		[commitLabel setFont:[UIFont systemFontOfSize:12]];
@@ -87,6 +94,11 @@
 		[commitSha setText:[[commit sha] substringToIndex:20]];
 		[treeSha setText:[[commit tree] substringToIndex:20]];
 		[parentSha setText:[[[commit parents] objectAtIndex:0] substringToIndex:20]];
+	
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+		[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+		[committedDateLabel setText:[dateFormatter stringFromDate:[commit committedDate]]];
 	}
 }
 
@@ -113,7 +125,8 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	[messageLabel setFrame:CGRectMake(5,5,self.frame.size.width-205, 25)];
-	[authorLabel setFrame:CGRectMake(70,50,self.frame.size.width-270,25)];
+	[authorLabel setFrame:CGRectMake(70,40,self.frame.size.width-270,25)];
+	[committedDateLabel setFrame:CGRectMake(70,60,self.frame.size.width-270,25)];
 	[commitLabel setFrame:CGRectMake(self.frame.size.width-200,10,100,25)];
 	[treeLabel setFrame:CGRectMake(self.frame.size.width-200,35,100,25)];
 	[parentLabel setFrame:CGRectMake(self.frame.size.width-200,60,100,25)];
@@ -126,6 +139,7 @@
 	[commit release];
 	[messageLabel release];
 	[authorLabel release];
+	[committedDateLabel release];
 	[commitLabel release];
 	[treeLabel release];
 	[parentLabel release];

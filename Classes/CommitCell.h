@@ -13,6 +13,7 @@
 	id<GitHubCommit> commit;
 	UILabel *messageLabel;
 	UILabel *authorLabel;
+	UILabel *committedDateLabel;
 	UILabel *commitLabel;
 	UILabel *treeLabel;
 	UILabel *parentLabel;
@@ -24,6 +25,7 @@
 @property(nonatomic, retain)id<GitHubCommit> commit;
 @property(nonatomic, retain)UILabel *messageLabel;
 @property(nonatomic, retain)UILabel *authorLabel;
+@property(nonatomic, retain)UILabel *committedDateLabel;
 @property(nonatomic, retain)UILabel *commitLabel;
 @property(nonatomic, retain)UILabel *treeLabel;
 @property(nonatomic, retain)UILabel *parentLabel;
