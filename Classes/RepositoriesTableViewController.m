@@ -198,6 +198,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	FileBrowserTableViewController *fileBrowser = [[FileBrowserTableViewController alloc] initWithRepository:[[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] name] 
 																									  andSha:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+	[fileBrowser setTitle:[[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] name]];
 	[self.navigationController pushViewController:fileBrowser animated:YES];
 	[fileBrowser release];
 }

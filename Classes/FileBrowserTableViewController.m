@@ -35,7 +35,6 @@
 		[self setBranch:@"master"];
 		[self setTableData:[NSMutableArray array]];
 
-		[self setTitle:self.repository];
 		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
 		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
 		
@@ -285,21 +284,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if([contentPicker selectedSegmentIndex] == 0)  {
 		if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
-//			NSString *sha = [[tableData objectAtIndex:indexPath.row] sha];
-//			[tableData removeAllObjects];
-//			NSLog(sha);
-//			[GitHubObjectServiceFactory requestTreeItemsByTreeSha:sha
-//															 user:[[GitHubServiceSettings credential] user] 
-//													   repository:self.repository 
-//														 delegate:self];
-
 			 FileBrowserTableViewController *detailViewController = [[FileBrowserTableViewController alloc] initWithRepository:self.repository
 																														andSha:[[tableData objectAtIndex:indexPath.row] sha]];
-			 // ...
-			 // Pass the selected object to the new view controller.
+			 [detailViewController setTitle:[[tableData objectAtIndex:indexPath.row] name]];
 			 [self.navigationController pushViewController:detailViewController animated:YES];
 			 [detailViewController release];
-			 
 		}
 		else  {
 			[tableView deselectRowAtIndexPath:indexPath animated:YES];
