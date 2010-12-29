@@ -15,6 +15,7 @@
 																  GitHubServiceGotTreeItemDelegate,
 																  GitHubServiceGotIssueDelegate> {
 	NSString *repository;
+	NSString *sha;
 	NSString *branch;
 	NSMutableArray *tableData;
 	UIPopoverController *branchPicker;
@@ -22,12 +23,13 @@
 }
 
 @property(nonatomic, retain)NSString *repository;
+@property(nonatomic, retain)NSString *sha;
 @property(nonatomic, retain)NSString *branch;
 @property(nonatomic, retain)NSMutableArray *tableData;
 @property(nonatomic, retain)UIPopoverController *branchPicker;
 @property(nonatomic, retain)UISegmentedControl *contentPicker;
 
-- (id)initWithRepository:(NSString *)repo;
+- (id)initWithRepository:(NSString *)repo andSha:(NSString *)s;
 - (void)getSource;
 - (void)getCommits; 
 - (void)getIssues; 

@@ -8,6 +8,7 @@
 
 #import "RepositoriesTableViewController.h"
 #import "GitHubRepositoryServiceFactory.h"
+#import "GitHubCommitServiceFactory.h"
 #import "GitHubServiceSettings.h"
 #import "RepositoryCell.h"
 #import "FileBrowserTableViewController.h"
@@ -27,7 +28,10 @@
 		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
 		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
 
-		tableData = [[NSMutableArray alloc] init];
+		tableData = [[NSMutableArray alloc] initWithObjects:
+					 [NSMutableArray array],
+					 [NSMutableArray array],
+					 nil];
 		
 		[self setTitle:@"Repositories"];
     }
@@ -35,12 +39,19 @@
 }
 
 - (void)loadContent  {
-	[tableData removeAllObjects];
+	[[tableData objectAtIndex:0] removeAllObjects];
+	[[tableData objectAtIndex:1] removeAllObjects];
 	[GitHubRepositoryServiceFactory requestRepositoriesOwnedByUser:[[GitHubServiceSettings credential] user] delegate:self];
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotRepository:(id<GitHubRepository>)repository  {
-	[tableData addObject:repository];
+	[[tableData objectAtIndex:0] addObject:repository];
+}
+
+-(void)gitHubService:(id <GitHubService>)gitHubService gotCommit:(id <GitHubCommit>)commit  {
+	[gitHubService cancelRequest];
+	[[tableData objectAtIndex:1] addObject:[commit sha]];
+	[self loadNextCommit];
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService didFailWithError:(NSError *)error  {
@@ -48,7 +59,21 @@
 }
 
 -(void)gitHubServiceDone:(id<GitHubService>)gitHubService  {
-	[self.tableView reloadData];
+	[self loadNextCommit];
+}
+
+- (void)loadNextCommit  {
+	static int i = 0;
+	if(i < [[tableData objectAtIndex:0] count])  {
+		[GitHubCommitServiceFactory requestCommitsOnBranch:@"master" 
+												repository:[[[tableData objectAtIndex:0] objectAtIndex:i] name]
+													  user:[[GitHubServiceSettings credential] user] 
+												  delegate:self];
+		i++;
+	}
+	else  {
+		[self.tableView reloadData];
+	}
 }
 
 
@@ -98,14 +123,12 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [tableData count];
+    return [[tableData objectAtIndex:0] count];
 }
 
 
@@ -119,11 +142,11 @@
         cell = [[[RepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	[[cell nameLabel] setText:[[tableData objectAtIndex:indexPath.row] name]];
-	[[cell descLabel] setText:[[tableData objectAtIndex:indexPath.row] desc]];
-	[[cell homepageLabel] setText:[[[tableData objectAtIndex:indexPath.row] homepage] absoluteString]];
-	[[cell forksLabel] setText:[NSString stringWithFormat:@"%d", [[tableData objectAtIndex:indexPath.row] forks]]];
-	[[cell watchersLabel] setText:[NSString stringWithFormat:@"%d", [[tableData objectAtIndex:indexPath.row] watchers]]];
+	[[cell nameLabel] setText:[[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] name]];
+	[[cell descLabel] setText:[[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] desc]];
+	[[cell homepageLabel] setText:[[[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] homepage] absoluteString]];
+	[[cell forksLabel] setText:[NSString stringWithFormat:@"%d", [[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] forks]]];
+	[[cell watchersLabel] setText:[NSString stringWithFormat:@"%d", [[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] watchers]]];
 	
     return cell;
 }
@@ -173,7 +196,8 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	FileBrowserTableViewController *fileBrowser = [[FileBrowserTableViewController alloc] initWithRepository:[[tableData objectAtIndex:indexPath.row] name]];
+	FileBrowserTableViewController *fileBrowser = [[FileBrowserTableViewController alloc] initWithRepository:[[[tableData objectAtIndex:0] objectAtIndex:indexPath.row] name] 
+																									  andSha:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
 	[self.navigationController pushViewController:fileBrowser animated:YES];
 	[fileBrowser release];
 }

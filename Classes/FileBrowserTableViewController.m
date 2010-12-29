@@ -18,6 +18,7 @@
 @implementation FileBrowserTableViewController
 
 @synthesize repository;
+@synthesize sha;
 @synthesize branch;
 @synthesize tableData;
 @synthesize branchPicker;
@@ -26,10 +27,11 @@
 #pragma mark -
 #pragma mark Initialization
 
-- (id)initWithRepository:(NSString *)repo {
+- (id)initWithRepository:(NSString *)repo andSha:(NSString *)s  {
     self = [super init];
     if (self) {
 		[self setRepository:repo];
+		[self setSha:s];
 		[self setBranch:@"master"];
 		[self setTableData:[NSMutableArray array]];
 
@@ -63,10 +65,10 @@
 - (void)getSource  {
 	[tableData removeAllObjects];
 	[self.tableView setRowHeight:50];
-	[GitHubCommitServiceFactory requestCommitsOnBranch:self.branch
-											repository:self.repository 
-												  user:[[GitHubServiceSettings credential] user] 
-											  delegate:self];
+	[GitHubObjectServiceFactory requestTreeItemsByTreeSha:self.sha
+													 user:[[GitHubServiceSettings credential] user] 
+											   repository:self.repository 
+												 delegate:self];
 }
 
 - (void)getCommits  {
@@ -107,15 +109,7 @@
 
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotCommit:(id<GitHubCommit>)commit  {
-	NSLog(@"%@", [commit description]);
-	if([contentPicker selectedSegmentIndex] == 0)  {
-		[gitHubService cancelRequest];
-		[GitHubObjectServiceFactory requestTreeItemsByTreeSha:[commit sha] 
-														 user:[[GitHubServiceSettings credential] user] 
-												   repository:self.repository 
-													 delegate:self];
-	}
-	else if([contentPicker selectedSegmentIndex] == 1)  {
+	if([contentPicker selectedSegmentIndex] == 1)  {
 		[tableData addObject:commit];
 	}
 }
@@ -289,14 +283,34 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-	 */
+	if([contentPicker selectedSegmentIndex] == 0)  {
+		if([[[tableData objectAtIndex:indexPath.row] type] isEqualToString:@"tree"])  {
+//			NSString *sha = [[tableData objectAtIndex:indexPath.row] sha];
+//			[tableData removeAllObjects];
+//			NSLog(sha);
+//			[GitHubObjectServiceFactory requestTreeItemsByTreeSha:sha
+//															 user:[[GitHubServiceSettings credential] user] 
+//													   repository:self.repository 
+//														 delegate:self];
+
+			 FileBrowserTableViewController *detailViewController = [[FileBrowserTableViewController alloc] initWithRepository:self.repository
+																														andSha:[[tableData objectAtIndex:indexPath.row] sha]];
+			 // ...
+			 // Pass the selected object to the new view controller.
+			 [self.navigationController pushViewController:detailViewController animated:YES];
+			 [detailViewController release];
+			 
+		}
+		else  {
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+		}
+	}
+	else if([contentPicker selectedSegmentIndex] == 1)  {		
+
+	}
+	else if([contentPicker selectedSegmentIndex] == 2)  {		
+		
+	}
 }
 
 
@@ -318,6 +332,7 @@
 
 - (void)dealloc {
 	[repository release];
+	[sha release];
 	[branch release];
 	[tableData release];
 	[branchPicker release];
