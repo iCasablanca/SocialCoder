@@ -146,8 +146,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-	
-	
+
 	UIImageView *bg = [[UIImageView alloc] initWithFrame:[cell bounds]];
 	[bg setImage:[UIImage imageNamed:@"rowBackground.png"]];
 	[cell setBackgroundView:bg];
@@ -158,23 +157,23 @@
 	[cell setSelectedBackgroundView:bgSelected];
 	[bgSelected release];
 	
-
-	
 	if(indexPath.row == 0)  {
 		[[cell textLabel] setText:@"Feed"];
+        [[cell imageView] setImage:[UIImage imageNamed:@"feed.png"]];
 	}
 	else  if(indexPath.row == 1)  {
 		[[cell textLabel] setText:@"Repositories"];
+        [[cell imageView] setImage:[UIImage imageNamed:@"repositories.png"]];
 	}
 	else  if(indexPath.row == 2)  {
 		[[cell textLabel] setText:@"Gists"];
+        [[cell imageView] setImage:[UIImage imageNamed:@"gists.png"]];
 	}
 	else  if(indexPath.row == 3)  {
 		[[cell textLabel] setText:@"Search"];
+        [[cell imageView] setImage:[UIImage imageNamed:@"search.png"]];
 	}
-	
-	//[[cell textLabel] setTextColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]];
-    
+	    
     return cell;
 }
 

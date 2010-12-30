@@ -29,6 +29,10 @@
 		1E5B36DC12B4F28E0044ACD9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B36DB12B4F28E0044ACD9 /* LoginViewController.m */; };
 		1E5B36E312B4F3220044ACD9 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B36E212B4F3220044ACD9 /* LoginView.m */; };
 		1E5B376512B50CAE0044ACD9 /* LoginFormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B376412B50CAE0044ACD9 /* LoginFormTableViewController.m */; };
+		1E80F17212CC140C004E0E29 /* gists.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E80F16F12CC140C004E0E29 /* gists.png */; };
+		1E80F17312CC140C004E0E29 /* repositories.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E80F17012CC140C004E0E29 /* repositories.png */; };
+		1E80F17412CC140C004E0E29 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E80F17112CC140C004E0E29 /* search.png */; };
+		1E80F18212CC154B004E0E29 /* feed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E80F18112CC154B004E0E29 /* feed.png */; };
 		1E8644DF12C94F7300F12375 /* dir.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E8644DD12C94F7300F12375 /* dir.png */; };
 		1E8644E012C94F7300F12375 /* txt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E8644DE12C94F7300F12375 /* txt.png */; };
 		1E86450312C9534000F12375 /* CommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E86450212C9534000F12375 /* CommitCell.m */; };
@@ -116,6 +120,10 @@
 		1E5B36E212B4F3220044ACD9 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		1E5B376312B50CAE0044ACD9 /* LoginFormTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginFormTableViewController.h; sourceTree = "<group>"; };
 		1E5B376412B50CAE0044ACD9 /* LoginFormTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginFormTableViewController.m; sourceTree = "<group>"; };
+		1E80F16F12CC140C004E0E29 /* gists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gists.png; path = Images/gists.png; sourceTree = "<group>"; };
+		1E80F17012CC140C004E0E29 /* repositories.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repositories.png; path = Images/repositories.png; sourceTree = "<group>"; };
+		1E80F17112CC140C004E0E29 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search.png; path = Images/search.png; sourceTree = "<group>"; };
+		1E80F18112CC154B004E0E29 /* feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feed.png; path = Images/feed.png; sourceTree = "<group>"; };
 		1E8644DD12C94F7300F12375 /* dir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dir.png; path = Images/dir.png; sourceTree = "<group>"; };
 		1E8644DE12C94F7300F12375 /* txt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = txt.png; path = Images/txt.png; sourceTree = "<group>"; };
 		1E86450112C9534000F12375 /* CommitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitCell.h; sourceTree = "<group>"; };
@@ -340,6 +348,10 @@
 		1E590579124BFD7F007FAAA9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1E80F18112CC154B004E0E29 /* feed.png */,
+				1E80F16F12CC140C004E0E29 /* gists.png */,
+				1E80F17012CC140C004E0E29 /* repositories.png */,
+				1E80F17112CC140C004E0E29 /* search.png */,
 				1E86468A12CBD10F00F12375 /* branch.png */,
 				1E86468B12CBD10F00F12375 /* tag.png */,
 				1E1C34D712C8AEA200B35DDC /* navbarBackground.png */,
@@ -637,6 +649,10 @@
 				1E8644E012C94F7300F12375 /* txt.png in Resources */,
 				1E86468C12CBD10F00F12375 /* branch.png in Resources */,
 				1E86468D12CBD10F00F12375 /* tag.png in Resources */,
+				1E80F17212CC140C004E0E29 /* gists.png in Resources */,
+				1E80F17312CC140C004E0E29 /* repositories.png in Resources */,
+				1E80F17412CC140C004E0E29 /* search.png in Resources */,
+				1E80F18212CC154B004E0E29 /* feed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
