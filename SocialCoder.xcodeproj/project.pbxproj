@@ -32,6 +32,8 @@
 		1E8644DF12C94F7300F12375 /* dir.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E8644DD12C94F7300F12375 /* dir.png */; };
 		1E8644E012C94F7300F12375 /* txt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E8644DE12C94F7300F12375 /* txt.png */; };
 		1E86450312C9534000F12375 /* CommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E86450212C9534000F12375 /* CommitCell.m */; };
+		1E86468C12CBD10F00F12375 /* branch.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E86468A12CBD10F00F12375 /* branch.png */; };
+		1E86468D12CBD10F00F12375 /* tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E86468B12CBD10F00F12375 /* tag.png */; };
 		1EC8E993124FB30700DCB289 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98A124FB30700DCB289 /* NSObject+SBJSON.m */; };
 		1EC8E994124FB30700DCB289 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98C124FB30700DCB289 /* NSString+SBJSON.m */; };
 		1EC8E995124FB30700DCB289 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98E124FB30700DCB289 /* SBJsonBase.m */; };
@@ -118,6 +120,8 @@
 		1E8644DE12C94F7300F12375 /* txt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = txt.png; path = Images/txt.png; sourceTree = "<group>"; };
 		1E86450112C9534000F12375 /* CommitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitCell.h; sourceTree = "<group>"; };
 		1E86450212C9534000F12375 /* CommitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitCell.m; sourceTree = "<group>"; };
+		1E86468A12CBD10F00F12375 /* branch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = branch.png; path = Images/branch.png; sourceTree = "<group>"; };
+		1E86468B12CBD10F00F12375 /* tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tag.png; path = Images/tag.png; sourceTree = "<group>"; };
 		1EC8E988124FB30700DCB289 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = JSON/JSON.h; sourceTree = "<group>"; };
 		1EC8E989124FB30700DCB289 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJSON.h"; path = "JSON/NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		1EC8E98A124FB30700DCB289 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJSON.m"; path = "JSON/NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -336,6 +340,8 @@
 		1E590579124BFD7F007FAAA9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1E86468A12CBD10F00F12375 /* branch.png */,
+				1E86468B12CBD10F00F12375 /* tag.png */,
 				1E1C34D712C8AEA200B35DDC /* navbarBackground.png */,
 				1E1C331412C7F8F000B35DDC /* texture2.png */,
 				1E1C329F12C7EFB000B35DDC /* rowBackground.png */,
@@ -629,6 +635,8 @@
 				1E1C34D812C8AEA200B35DDC /* navbarBackground.png in Resources */,
 				1E8644DF12C94F7300F12375 /* dir.png in Resources */,
 				1E8644E012C94F7300F12375 /* txt.png in Resources */,
+				1E86468C12CBD10F00F12375 /* branch.png in Resources */,
+				1E86468D12CBD10F00F12375 /* tag.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

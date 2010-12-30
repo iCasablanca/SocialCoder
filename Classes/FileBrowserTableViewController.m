@@ -23,6 +23,8 @@
 @synthesize tableData;
 @synthesize branchPicker;
 @synthesize contentPicker;
+@synthesize branchButton;
+@synthesize tagButton;
 
 #pragma mark -
 #pragma mark Initialization
@@ -38,9 +40,29 @@
 		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
 		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
 		
-		[[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
-																								   target:self 
-																								   action:@selector(chooseBranch:)]];
+        branchButton = [[UIBarButtonItem alloc]
+                        initWithImage:[UIImage imageNamed:@"branch.png"] 
+                                style:UIBarButtonItemStylePlain 
+                               target:self
+                               action:@selector(chooseBranch:)];
+		
+        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace 
+																					 target:nil 
+																					 action:nil];
+		[spaceButton setWidth:12.0];
+        
+        tagButton = [[UIBarButtonItem alloc]
+                     initWithImage:[UIImage imageNamed:@"tag.png"] 
+                            style:UIBarButtonItemStylePlain 
+                            target:self
+                            action:@selector(chooseTag:)];
+
+		UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 100, 45)];
+		[toolbar setBarStyle:-1];
+		[toolbar setItems:[NSArray arrayWithObjects:branchButton, spaceButton, tagButton, nil]];
+		[[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:toolbar]];
+        [spaceButton release];
+        [toolbar release];
 		
 		BranchPickerTableViewController *branchPickerTableView = [[BranchPickerTableViewController alloc] initWithRepository:self.repository];
 		branchPicker = [[UIPopoverController alloc] initWithContentViewController:branchPickerTableView];
@@ -102,10 +124,14 @@
 
 
 - (void)chooseBranch:(id)sender  {
-	[branchPicker presentPopoverFromBarButtonItem:[self.navigationItem rightBarButtonItem] 
+	[branchPicker presentPopoverFromBarButtonItem:branchButton
 					permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
+- (void)chooseTag:(id)sender  {
+	[branchPicker presentPopoverFromBarButtonItem:tagButton
+						 permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotCommit:(id<GitHubCommit>)commit  {
 	if([contentPicker selectedSegmentIndex] == 1)  {
@@ -326,6 +352,8 @@
 	[tableData release];
 	[branchPicker release];
 	[contentPicker release];
+    [branchButton release];
+    [tagButton release];
     [super dealloc];
 }
 
