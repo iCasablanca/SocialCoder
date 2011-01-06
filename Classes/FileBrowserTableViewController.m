@@ -12,8 +12,10 @@
 #import "GitHubServiceSettings.h"
 #import "GitHubObjectServiceFactory.h"
 #import "BranchPickerTableViewController.h"
+#import "TagPickerTableViewController.h"
 #import "GitHubIssueServiceFactory.h"
 #import "CommitCell.h"
+#import "FileViewController.h"
 
 @implementation FileBrowserTableViewController
 
@@ -22,6 +24,7 @@
 @synthesize branch;
 @synthesize tableData;
 @synthesize branchPicker;
+@synthesize tagPicker;
 @synthesize contentPicker;
 @synthesize branchButton;
 @synthesize tagButton;
@@ -67,6 +70,10 @@
 		BranchPickerTableViewController *branchPickerTableView = [[BranchPickerTableViewController alloc] initWithRepository:self.repository];
 		branchPicker = [[UIPopoverController alloc] initWithContentViewController:branchPickerTableView];
 		[branchPickerTableView release];
+        
+        TagPickerTableViewController *tagPickerTableView = [[TagPickerTableViewController alloc] initWithRepository:self.repository];
+		tagPicker = [[UIPopoverController alloc] initWithContentViewController:tagPickerTableView];
+		[tagPickerTableView release];
 		
 		contentPicker = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
 																   @"Source", 
@@ -124,12 +131,14 @@
 
 
 - (void)chooseBranch:(id)sender  {
+    [tagPicker dismissPopoverAnimated:NO];
 	[branchPicker presentPopoverFromBarButtonItem:branchButton
 					permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 - (void)chooseTag:(id)sender  {
-	[branchPicker presentPopoverFromBarButtonItem:tagButton
+    [branchPicker dismissPopoverAnimated:NO];
+	[tagPicker presentPopoverFromBarButtonItem:tagButton
 						 permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
@@ -317,7 +326,11 @@
 			 [detailViewController release];
 		}
 		else  {
-			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+            FileViewController *fileViewController = [[FileViewController alloc] initWithTreeSha:self.sha 
+                                                                                      repository:self.repository 
+                                                                                        treeItem:[tableData objectAtIndex:indexPath.row]];
+            [self.navigationController pushViewController:fileViewController animated:YES];
+            [fileViewController release];
 		}
 	}
 	else if([contentPicker selectedSegmentIndex] == 1)  {		
@@ -351,6 +364,7 @@
 	[branch release];
 	[tableData release];
 	[branchPicker release];
+    [tagPicker release];
 	[contentPicker release];
     [branchButton release];
     [tagButton release];

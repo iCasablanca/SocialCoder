@@ -17,6 +17,7 @@
 	NSString *branch;
 	NSMutableArray *tableData;
 	UIPopoverController *branchPicker;
+    UIPopoverController *tagPicker;
 	UISegmentedControl *contentPicker;
     UIBarButtonItem *branchButton;
     UIBarButtonItem *tagButton;
@@ -27,6 +28,7 @@
 @property(nonatomic, retain)NSString *branch;
 @property(nonatomic, retain)NSMutableArray *tableData;
 @property(nonatomic, retain)UIPopoverController *branchPicker;
+@property(nonatomic, retain)UIPopoverController *tagPicker;
 @property(nonatomic, retain)UISegmentedControl *contentPicker;
 @property(nonatomic, retain)UIBarButtonItem *branchButton;
 @property(nonatomic, retain)UIBarButtonItem *tagButton;
