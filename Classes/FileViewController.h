@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GitHubServiceGotBlobDelegate.h"
 #import "GitHubTreeItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface FileViewController : UIViewController<GitHubServiceGotBlobDelegate> {
 

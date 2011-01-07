@@ -23,48 +23,46 @@
                                                       repository:repository_
                                                             path:[treeItem_ name]
                                                         delegate:self];
+        
+
     }
     return self;
 }
 
 - (void)gitHubService:(id <GitHubService>)gitHubService gotBlob:(id <GitHubBlob>)blob  {
-    if([[blob mime] rangeOfString:@"image"].location != NSNotFound)  {
-        UIImageView *v = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithBase64EncodedString:[blob data]]]];
-    //    [v setFrame:CGRectMake(0,0,200,211)];
-    //    [v setAlpha:1.0];
-        [self.view addSubview:v];
-        [self.view setBackgroundColor:[UIColor greenColor]];
+    if([[blob mime] rangeOfString:@"image"].location != NSNotFound)  {        
+        NSMutableString *path = [NSMutableString stringWithFormat:@"https://github.com/tonisuter/%@/raw/master", [[[self.navigationController viewControllers] objectAtIndex:1] title]];
+        for(int i = 2; i < [[self.navigationController viewControllers] count]; i++)  {
+            [path appendFormat:@"/%@", [[[self.navigationController viewControllers] objectAtIndex:i] title]];
+        }
+
+        UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:path]]]];
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0,0,imgView.frame.size.width+10, imgView.frame.size.height+10)];
+        [imgView setCenter:bgView.center];
+        [bgView setBackgroundColor:[UIColor whiteColor]];
+        [bgView addSubview:imgView];
+        [bgView setCenter:self.view.center];
+        [bgView.layer setCornerRadius:5.0];
+        [bgView.layer setShadowColor:[UIColor blackColor].CGColor];
+        [bgView.layer setShadowOffset:CGSizeMake(5,10)];
+        [bgView.layer setShadowOpacity:1.0];
+        [bgView.layer setShadowRadius:5.0];
+        [bgView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
+        [self.view addSubview:bgView];
+        
+        [self.view setBackgroundColor:[UIColor grayColor]];
+
     }
     else  {
         UITextView *textView = [[UITextView alloc] initWithFrame:self.view.bounds];
+        [textView setBackgroundColor:[UIColor grayColor]];
         [textView setText:[blob data]];
+        [textView setFont:[UIFont systemFontOfSize:16.0]];
+
+        [textView setTextColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
         [self.view addSubview:textView];
         [textView release];
     }
-}
-
-- (NSString *)decodeBase64:(NSString *)input {
-    NSString *alphabet = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-";
-    NSString *decoded = @"";
-    NSString *encoded = [input stringByPaddingToLength:(ceil([input length] / 4) * 4)
-                                            withString:@"A"
-                                       startingAtIndex:0];
-    
-    int i;
-    char a, b, c, d;
-    UInt32 z;
-    
-    for(i = 0; i < [encoded length]; i += 4) {
-        a = [alphabet rangeOfString:[encoded substringWithRange:NSMakeRange(i + 0, 1)]].location;
-        b = [alphabet rangeOfString:[encoded substringWithRange:NSMakeRange(i + 1, 1)]].location;
-        c = [alphabet rangeOfString:[encoded substringWithRange:NSMakeRange(i + 2, 1)]].location;
-        d = [alphabet rangeOfString:[encoded substringWithRange:NSMakeRange(i + 3, 1)]].location;
-        
-        z = ((UInt32)a << 26) + ((UInt32)b << 20) + ((UInt32)c << 14) + ((UInt32)d << 8);
-        decoded = [decoded stringByAppendingString:[NSString stringWithCString:(char *)&z]];
-    }
-    
-    return decoded;
 }
 
 -(void)gitHubService:(id<GitHubService>)gitHubService didFailWithError:(NSError *)error  {
