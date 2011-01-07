@@ -37,7 +37,7 @@
 
 -(void)gitHubService:(id<GitHubService>)gitHubService gotBranch:(id<GitHubBranch>)branch  {
 	[[tableData objectAtIndex:0] addObject:branch];
-	if([[tableData objectAtIndex:1] count] == 0)  {
+    if([[branch name] isEqualToString:@"master"])  {
 		[[tableData objectAtIndex:1] addObject:[NSNumber numberWithBool:YES]];
 	}
 	else  {
