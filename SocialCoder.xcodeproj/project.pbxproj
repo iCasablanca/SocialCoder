@@ -25,6 +25,8 @@
 		1E269C8F12BE6845005A3289 /* watchers.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E269C8D12BE6845005A3289 /* watchers.png */; };
 		1E3EA0421250FC9100B7C5B6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3EA0411250FC9100B7C5B6 /* MessageUI.framework */; };
 		1E54136212BCAB3C006D3200 /* RepositoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E54136112BCAB3C006D3200 /* RepositoriesTableViewController.m */; };
+		1E584E9212D76E5C00050CA8 /* rowBg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E584E9112D76E5C00050CA8 /* rowBg1.png */; };
+		1E584EB912D7DD8D00050CA8 /* rowBg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E584EB812D7DD8D00050CA8 /* rowBg2.png */; };
 		1E590578124BFD7A007FAAA9 /* default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E590577124BFD7A007FAAA9 /* default_avatar.png */; };
 		1E5B36DC12B4F28E0044ACD9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B36DB12B4F28E0044ACD9 /* LoginViewController.m */; };
 		1E5B36E312B4F3220044ACD9 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5B36E212B4F3220044ACD9 /* LoginView.m */; };
@@ -39,12 +41,13 @@
 		1E86450312C9534000F12375 /* CommitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E86450212C9534000F12375 /* CommitCell.m */; };
 		1E86468C12CBD10F00F12375 /* branch.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E86468A12CBD10F00F12375 /* branch.png */; };
 		1E86468D12CBD10F00F12375 /* tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E86468B12CBD10F00F12375 /* tag.png */; };
-		1E9624E412CE5EBB00A3571D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9624E312CE5EBB00A3571D /* NSData+Base64.m */; };
 		1EC8E993124FB30700DCB289 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98A124FB30700DCB289 /* NSObject+SBJSON.m */; };
 		1EC8E994124FB30700DCB289 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98C124FB30700DCB289 /* NSString+SBJSON.m */; };
 		1EC8E995124FB30700DCB289 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E98E124FB30700DCB289 /* SBJsonBase.m */; };
 		1EC8E996124FB30700DCB289 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E990124FB30700DCB289 /* SBJsonParser.m */; };
 		1EC8E997124FB30700DCB289 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8E992124FB30700DCB289 /* SBJsonWriter.m */; };
+		1ECC6B7812D9230B00773332 /* ShadowedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECC6B7712D9230B00773332 /* ShadowedTableView.m */; };
+		1ECC6B9212D9236100773332 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ECC6B9112D9236100773332 /* QuartzCore.framework */; };
 		1EF58D0212BBFB4B00754D7E /* GitHubCommitFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF58C9E12BBFB4B00754D7E /* GitHubCommitFactory.m */; };
 		1EF58D0312BBFB4B00754D7E /* GitHubCommitImp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF58CA012BBFB4B00754D7E /* GitHubCommitImp.m */; };
 		1EF58D0412BBFB4B00754D7E /* GitHubCommitServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF58CA112BBFB4B00754D7E /* GitHubCommitServiceFactory.m */; };
@@ -85,7 +88,6 @@
 		1EF58EB612BC206B00754D7E /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF58EB512BC206B00754D7E /* ContentViewController.m */; };
 		1EF58F0212BC27CF00754D7E /* FeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF58F0112BC27CF00754D7E /* FeedTableViewController.m */; };
 		1EFB903412CE1AD0006E66EF /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFB903312CE1AD0006E66EF /* FileViewController.m */; };
-		28193055112F811F00ECF9B4 /* SocialCoder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28193054112F811F00ECF9B4 /* SocialCoder.xcdatamodeld */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 /* End PBXBuildFile section */
@@ -116,6 +118,8 @@
 		1E3EA0411250FC9100B7C5B6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1E54136012BCAB3C006D3200 /* RepositoriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoriesTableViewController.h; sourceTree = "<group>"; };
 		1E54136112BCAB3C006D3200 /* RepositoriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoriesTableViewController.m; sourceTree = "<group>"; };
+		1E584E9112D76E5C00050CA8 /* rowBg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rowBg1.png; path = Images/rowBg1.png; sourceTree = "<group>"; };
+		1E584EB812D7DD8D00050CA8 /* rowBg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rowBg2.png; path = Images/rowBg2.png; sourceTree = "<group>"; };
 		1E590577124BFD7A007FAAA9 /* default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_avatar.png; path = Images/default_avatar.png; sourceTree = "<group>"; };
 		1E5B36DA12B4F28E0044ACD9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		1E5B36DB12B4F28E0044ACD9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -135,8 +139,6 @@
 		1E86450212C9534000F12375 /* CommitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitCell.m; sourceTree = "<group>"; };
 		1E86468A12CBD10F00F12375 /* branch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = branch.png; path = Images/branch.png; sourceTree = "<group>"; };
 		1E86468B12CBD10F00F12375 /* tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tag.png; path = Images/tag.png; sourceTree = "<group>"; };
-		1E9624E212CE5EBB00A3571D /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		1E9624E312CE5EBB00A3571D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		1EC8E988124FB30700DCB289 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = JSON/JSON.h; sourceTree = "<group>"; };
 		1EC8E989124FB30700DCB289 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJSON.h"; path = "JSON/NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		1EC8E98A124FB30700DCB289 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJSON.m"; path = "JSON/NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -148,6 +150,9 @@
 		1EC8E990124FB30700DCB289 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonParser.m; path = JSON/SBJsonParser.m; sourceTree = "<group>"; };
 		1EC8E991124FB30700DCB289 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = JSON/SBJsonWriter.h; sourceTree = "<group>"; };
 		1EC8E992124FB30700DCB289 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = JSON/SBJsonWriter.m; sourceTree = "<group>"; };
+		1ECC6B7612D9230B00773332 /* ShadowedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowedTableView.h; sourceTree = "<group>"; };
+		1ECC6B7712D9230B00773332 /* ShadowedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowedTableView.m; sourceTree = "<group>"; };
+		1ECC6B9112D9236100773332 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1EF58C9D12BBFB4B00754D7E /* GitHubCommitFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitHubCommitFactory.h; sourceTree = "<group>"; };
 		1EF58C9E12BBFB4B00754D7E /* GitHubCommitFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitHubCommitFactory.m; sourceTree = "<group>"; };
 		1EF58C9F12BBFB4B00754D7E /* GitHubCommitImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitHubCommitImp.h; sourceTree = "<group>"; };
@@ -253,7 +258,6 @@
 		1EFB903212CE1AD0006E66EF /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
 		1EFB903312CE1AD0006E66EF /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28C3AD890F43EF2300507BA6 /* SocialCoder.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = SocialCoder.xcdatamodel; sourceTree = "<group>"; };
 		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* SocialCoder_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialCoder_Prefix.pch; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				1E3EA0421250FC9100B7C5B6 /* MessageUI.framework in Frameworks */,
+				1ECC6B9212D9236100773332 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,8 +284,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1E9624E212CE5EBB00A3571D /* NSData+Base64.h */,
-				1E9624E312CE5EBB00A3571D /* NSData+Base64.m */,
 				1EF58C9B12BBFB4B00754D7E /* Implementation */,
 				1EF58CE212BBFB4B00754D7E /* Interface */,
 				1EC8E987124FB2F100DCB289 /* JSON */,
@@ -296,6 +299,8 @@
 				1EF58E9212BC1DA500754D7E /* MenuTableViewController.m */,
 				1EF58EB412BC206B00754D7E /* ContentViewController.h */,
 				1EF58EB512BC206B00754D7E /* ContentViewController.m */,
+				1ECC6B7612D9230B00773332 /* ShadowedTableView.h */,
+				1ECC6B7712D9230B00773332 /* ShadowedTableView.m */,
 				1E1C2F6B12C55C4C00B35DDC /* Feed */,
 				1E1C2F6C12C55C6400B35DDC /* Repositories */,
 				1E1C2F6D12C55C7D00B35DDC /* Gists */,
@@ -363,6 +368,8 @@
 		1E590579124BFD7F007FAAA9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1E584EB812D7DD8D00050CA8 /* rowBg2.png */,
+				1E584E9112D76E5C00050CA8 /* rowBg1.png */,
 				1E80F18112CC154B004E0E29 /* feed.png */,
 				1E80F16F12CC140C004E0E29 /* gists.png */,
 				1E80F17012CC140C004E0E29 /* repositories.png */,
@@ -584,7 +591,6 @@
 			isa = PBXGroup;
 			children = (
 				1E590579124BFD7F007FAAA9 /* Images */,
-				28193054112F811F00ECF9B4 /* SocialCoder.xcdatamodeld */,
 				8D1107310486CEB800E47090 /* SocialCoder-Info.plist */,
 			);
 			name = Resources;
@@ -593,6 +599,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1ECC6B9112D9236100773332 /* QuartzCore.framework */,
 				1E3EA0411250FC9100B7C5B6 /* MessageUI.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -668,6 +675,8 @@
 				1E80F17312CC140C004E0E29 /* repositories.png in Resources */,
 				1E80F17412CC140C004E0E29 /* search.png in Resources */,
 				1E80F18212CC154B004E0E29 /* feed.png in Resources */,
+				1E584E9212D76E5C00050CA8 /* rowBg1.png in Resources */,
+				1E584EB912D7DD8D00050CA8 /* rowBg2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +689,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* SocialCoderAppDelegate.m in Sources */,
-				28193055112F811F00ECF9B4 /* SocialCoder.xcdatamodeld in Sources */,
 				1EC8E993124FB30700DCB289 /* NSObject+SBJSON.m in Sources */,
 				1EC8E994124FB30700DCB289 /* NSString+SBJSON.m in Sources */,
 				1EC8E995124FB30700DCB289 /* SBJsonBase.m in Sources */,
@@ -735,8 +743,8 @@
 				1E1C312F12C74CC300B35DDC /* BranchPickerTableViewController.m in Sources */,
 				1E86450312C9534000F12375 /* CommitCell.m in Sources */,
 				1EFB903412CE1AD0006E66EF /* FileViewController.m in Sources */,
-				1E9624E412CE5EBB00A3571D /* NSData+Base64.m in Sources */,
 				1E76046312D6802000565E97 /* TagPickerTableViewController.m in Sources */,
+				1ECC6B7812D9230B00773332 /* ShadowedTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -833,19 +841,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		28193054112F811F00ECF9B4 /* SocialCoder.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				28C3AD890F43EF2300507BA6 /* SocialCoder.xcdatamodel */,
-			);
-			currentVersion = 28C3AD890F43EF2300507BA6 /* SocialCoder.xcdatamodel */;
-			path = SocialCoder.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

@@ -9,14 +9,14 @@
 #import "FileViewController.h"
 #import "GitHubServiceSettings.h"
 #import "GitHubObjectServiceFactory.h"
-#import "NSData+Base64.h"
-
 
 @implementation FileViewController
 
 - (id)initWithTreeSha:(NSString *)sha_ repository:(NSString *)repository_ treeItem:(id<GitHubTreeItem>)treeItem_  {
     self = [super init];
     if(self)  {
+        [self.view setBackgroundColor:[UIColor grayColor]];
+
         [self setTitle:[treeItem_ name]];
         [GitHubObjectServiceFactory requestBlobWithDataByTreeSha:sha_
                                                             user:[[GitHubServiceSettings credential] user] 
@@ -41,6 +41,7 @@
         [imgView setCenter:bgView.center];
         [bgView setBackgroundColor:[UIColor whiteColor]];
         [bgView addSubview:imgView];
+        [imgView release];
         [bgView setCenter:self.view.center];
         [bgView.layer setCornerRadius:5.0];
         [bgView.layer setShadowColor:[UIColor blackColor].CGColor];
@@ -49,8 +50,7 @@
         [bgView.layer setShadowRadius:5.0];
         [bgView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
         [self.view addSubview:bgView];
-        
-        [self.view setBackgroundColor:[UIColor grayColor]];
+        [bgView release];
 
     }
     else  {
@@ -58,7 +58,6 @@
         [textView setBackgroundColor:[UIColor grayColor]];
         [textView setText:[blob data]];
         [textView setFont:[UIFont systemFontOfSize:16.0]];
-
         [textView setTextColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
         [self.view addSubview:textView];
         [textView release];

@@ -12,6 +12,7 @@
 #import "GitHubServiceSettings.h"
 #import "RepositoryCell.h"
 #import "FileBrowserTableViewController.h"
+#import "ShadowedTableView.h"
 
 @implementation RepositoriesTableViewController
 
@@ -24,10 +25,16 @@
 - (id)init {
     self = [super init];
     if (self) {
-		[self.tableView setRowHeight:100];
-		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
-		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
-
+        self.tableView = [[ShadowedTableView alloc] init];
+        [self.tableView setRowHeight:100];
+		[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [self.tableView setBackgroundColor:[UIColor clearColor]];
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:self.view.bounds];
+        [bgView setBackgroundColor:[UIColor grayColor]];
+        [self.tableView setBackgroundView:bgView];
+        [bgView release];
+    
 		tableData = [[NSMutableArray alloc] initWithObjects:
 					 [NSMutableArray array],
 					 [NSMutableArray array],

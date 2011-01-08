@@ -99,6 +99,7 @@
 		[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 		[dateFormatter setDateStyle:NSDateFormatterLongStyle];
 		[committedDateLabel setText:[dateFormatter stringFromDate:[commit committedDate]]];
+        [dateFormatter release];
 	}
 }
 

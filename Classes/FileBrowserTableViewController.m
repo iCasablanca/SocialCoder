@@ -16,6 +16,7 @@
 #import "GitHubIssueServiceFactory.h"
 #import "CommitCell.h"
 #import "FileViewController.h"
+#import "ShadowedTableView.h"
 
 @implementation FileBrowserTableViewController
 
@@ -39,9 +40,17 @@
 		[self setSha:s];
 		[self setBranch:@"master"];
 		[self setTableData:[NSMutableArray array]];
+        
 
-		[self.tableView setBackgroundColor:[UIColor colorWithRed:0.89 green:0.87 blue:0.81 alpha:1.0]];
-		[self.tableView setSeparatorColor:[UIColor colorWithRed:0.71 green:0.70 blue:0.65 alpha:1.0]];
+    
+        self.tableView = [[ShadowedTableView alloc] init];
+		[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [self.tableView setBackgroundColor:[UIColor clearColor]];
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:self.view.bounds];
+        [bgView setBackgroundColor:[UIColor grayColor]];
+        [self.tableView setBackgroundView:bgView];
+        [bgView release];
 		
         branchButton = [[UIBarButtonItem alloc]
                         initWithImage:[UIImage imageNamed:@"branch.png"] 
@@ -63,7 +72,9 @@
 		UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 100, 45)];
 		[toolbar setBarStyle:-1];
 		[toolbar setItems:[NSArray arrayWithObjects:branchButton, spaceButton, tagButton, nil]];
-		[[self navigationItem] setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:toolbar]];
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
+		[[self navigationItem] setRightBarButtonItem:rightBarButton];
+        [rightBarButton release];
         [spaceButton release];
         [toolbar release];
 		
@@ -172,38 +183,38 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //self.clearsSelectionOnViewWillAppear = YES;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
 
-/*
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
-*/
-/*
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
-*/
-/*
+
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
-*/
-/*
+
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
-*/
+
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -268,7 +279,19 @@
 		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 		[[cell imageView] setImage:nil];
 	}
+    
+    [cell setBackgroundColor:[UIColor clearColor]];
 	
+    UIImageView *bg = [[UIImageView alloc] initWithFrame:[cell bounds]];
+	[bg setImage:[UIImage imageNamed:@"rowBg1.png"]];
+	[cell setBackgroundView:bg];
+	[bg release];
+    
+    UIImageView *bg2 = [[UIImageView alloc] initWithFrame:[cell bounds]];
+	[bg2 setImage:[UIImage imageNamed:@"rowBg2.png"]];
+	[cell setSelectedBackgroundView:bg2];
+	[bg2 release];
+    
     return cell;
 }
 

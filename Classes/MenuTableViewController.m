@@ -24,7 +24,7 @@
 		[self.view setBackgroundColor:[UIColor clearColor]];
 		UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.tableView.frame.size.width, 70)];
 		[self.tableView setTableHeaderView:headerView];
-	
+        [headerView release];
 		[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     }
     return self;

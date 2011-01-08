@@ -24,6 +24,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
 		[self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        UIImageView *bg = [[UIImageView alloc] initWithFrame:[self bounds]];
+        [bg setImage:[UIImage imageNamed:@"rowBg1.png"]];
+        [self setBackgroundView:bg];
+        [bg release];
+        
+        UIImageView *bg2 = [[UIImageView alloc] initWithFrame:[self bounds]];
+        [bg2 setImage:[UIImage imageNamed:@"rowBg2.png"]];
+        [self setSelectedBackgroundView:bg2];
+        [bg2 release];
 		
 		nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,10,self.contentView.frame.size.width-10,30)];
 		[nameLabel setText:@"<name>"];

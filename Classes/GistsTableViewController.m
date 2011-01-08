@@ -7,7 +7,7 @@
 //
 
 #import "GistsTableViewController.h"
-
+#import "ShadowedTableView.h"
 
 @implementation GistsTableViewController
 
@@ -19,6 +19,15 @@
     self = [super init];
     if (self) {
 		[self setTitle:@"Gists"];
+
+        self.tableView = [[ShadowedTableView alloc] init];
+		[self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [self.tableView setBackgroundColor:[UIColor clearColor]];
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:self.view.bounds];
+        [bgView setBackgroundColor:[UIColor grayColor]];
+        [self.tableView setBackgroundView:bgView];
+        [bgView release];
     }
     return self;
 }
